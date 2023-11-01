@@ -1,0 +1,6 @@
+## Interface: 30200
+## Title: NugRunningDrainSoul
+## Notes: Drain Soul ticks plugin for NugRunning
+## Author: d87
+## Dependencies: NugRunning
+NugRunningDrainSoul.lua
