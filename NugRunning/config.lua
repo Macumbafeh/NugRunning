@@ -310,10 +310,11 @@ end
 
 
 if class == "ROGUE" then
+
 AddSpell({ 37165 },{ name = "Haste",duration = 6, target = "player", color = colors.LRED }) -- t3.5 2pc proc
 
 -- BUFFS
-AddSpell({ 57993 },{ name = "Envenom", color = { 0, 0.65, 0}, duration = function() return (1+NugRunning.cpWas) end })
+-- AddSpell({ 57993 },{ name = "Envenom", color = { 0, 0.65, 0}, duration = function() return (1+NugRunning.cpWas) end })
 
 AddSpell({ 2983,8696,11305 },{ name = "Sprint",duration = 15 })
 AddSpell({ 5277,26669 },{ name = "Evasion", color = colors.PINK, duration = 15 })
@@ -325,10 +326,7 @@ AddSpell({ 13877 },{ name = "Blade Flurry",duration = 15, color = colors.LRED })
 AddSpell({ 51713 },{ name = "Shadow Dance",duration = 10, color = colors.LRED })
 AddSpell({ 58427 },{ name = "Overkill", duration = 20, color =  colors.RED })                    
                 
-AddSpell({ 5171,6774 },{ name = "Slice and Dice", short = "SnD", color = colors.PURPLE,  duration = function() 
-    if Talent(51664)>3 then NugRunning.cpWas = 5 end
-    return (((6 + NugRunning.cpWas *3) + Glyph(56810)*4) * (1+Talent(14165)*0.25))
-    end })
+AddSpell({ 5171,6774 },{ name = "Slice and Dice", short = "SnD", color = colors.PURPLE, duration = function() return ((7 + NugRunning.cpWas * 3) * (1+Talent(14165)*0.25)) end })
 AddSpell({ 31234,31235,31236 },{ name = "Find Weakness",duration = 10 })
 
 AddSpell({ 11327,11329,26888 },{ name = "Vanish",duration = 10 })
@@ -338,22 +336,22 @@ AddSpell({ 36554 },{ name = "Shadowstep speed",duration = 3 })
 AddSpell({ 36563 },{ name = "Shadowstep damage",duration = 10 })
 --~ 
 -- DEBUFFS
-AddSpell({ 1833 },{ name = "Cheap Shot",duration = 4, color = colors.LRED })
-AddSpell({ 408 },{ name = "Kidney Shot",duration = 5,color = colors.LRED })
-AddSpell({ 8643 },{ name = "Kidney Shot",duration = 6,color = colors.LRED })
-AddSpell({ 1776, 1777, 8629, 11285, 11286, 38764 },{ name = "Gouge", color = colors.PINK, duration = 4, init = function(self)self.duration = 4 + Talent(13741)*0.5 end })
-AddSpell({ 2094 },{ name = "Blind",duration = 10, color = {0.20, 0.80, 0.2} })
+AddSpell({ 1833 },{ name = "Cheap Shot",duration = 4, pvpduration = 4, color = colors.LRED })
+AddSpell({ 408 },{ name = "Kidney Shot",duration = function() return (1 + NugRunning.cpWas * 1) end, pvpduration = function() return (1 + NugRunning.cpWas * 1) end, color = colors.LRED })
+AddSpell({ 8643 },{ name = "Kidney Shot",duration = function() return (2 + NugRunning.cpWas * 1) end, pvpduration = function() return (2 + NugRunning.cpWas * 1) end, color = colors.LRED })
+AddSpell({ 1776, 1777, 8629, 11285, 11286, 38764 },{ name = "Gouge", color = colors.PINK, duration = 4, pvpduration = 4, init = function(self)self.duration = 4 + Talent(13741)*0.5 end })
+AddSpell({ 2094 },{ name = "Blind",duration = 10, pvpduration = 10, color = {0.20, 0.80, 0.2} })
 AddSpell({ 8647, 8649, 8650, 11197, 11198, 26866 },{ name = "Expose Armor", color = colors.LBLUE, duration = 30 --[[function() return NugRunning.cpWas * 6 + Glyph(56803)*12 end]] })
 AddSpell({ 51722 },{ name = "Dismantle",duration = 10,color = colors.LRED })
 
-AddSpell({ 6770 },{ name = "Sap",duration = 25, color = colors.LBLUE })
-AddSpell({ 2070 },{ name = "Sap",duration = 35, color = colors.LBLUE })
-AddSpell({ 11297 },{ name = "Sap",duration = 45, color = colors.LBLUE })
-AddSpell({ 51724 },{ name = "Sap",duration = 60, color = colors.LBLUE })
+AddSpell({ 6770 },{ name = "Sap",duration = 25, pvpduration = 10, color = colors.LBLUE })
+AddSpell({ 2070 },{ name = "Sap",duration = 35, pvpduration = 10, color = colors.LBLUE })
+AddSpell({ 11297 },{ name = "Sap",duration = 45, pvpduration = 10, color = colors.LBLUE })
+AddSpell({ 51724 },{ name = "Sap",duration = 60, pvpduration = 10, color = colors.LBLUE })
 
-AddSpell({ 1943,8639,8640,11273,11274,11275,26867,48671,48672 },{ name = "Rupture", color = colors.RED, duration = function() return (6 + NugRunning.cpWas * 2) + Glyph(56801)*4 end})
+AddSpell({ 1943,8639,8640,11273,11274,11275,26867,48671,48672 },{ name = "Rupture", color = colors.RED, duration = function() return (8 + NugRunning.cpWas * 2) end})
 AddSpell({ 703,8631,8632,8633,11289,11290,26839,26884,48675,48676,42964 },{ name = "Garrote", color = colors.RED, duration = 18 })
-AddSpell({ 1330, 26884 },{ name = "Silence", color = colors.PINK, duration = 3 })
+AddSpell({ 1330 },{ name = "Silence", color = colors.PINK, duration = 3 })
 AddSpell({ 18425 },{ name = "Silenced", color = colors.PINK, duration = 3 })
 AddSpell({ 16511, 17347, 17348, 26864 },{ name = "Hemorrhage", color = colors.RED, duration = 15 })
 AddSpell({ 14278 },{ name = "Ghostly Strike", color = colors.PURPLE, duration = 7 })
@@ -610,12 +608,12 @@ AddSpell({ 48438,53248,53249,53251 },{ name = "Wild Growth", duration = 7, multi
 AddSpell({ 29166 },{ name = "Innervate",duration = 10 })
 
 AddSpell({ 22812 },{ name = "Barkskin",duration = 12 })
-AddSpell({ 52610 },{ name = "Savage Roar",duration = function() return (9 + NugRunning.cpWas * 5) end })
+-- AddSpell({ 52610 },{ name = "Savage Roar",duration = function() return (9 + NugRunning.cpWas * 5) end })
 AddSpell({ 1850,9821,33357 },{ name = "Dash", duration = 15 })
 
 --~ AddSpell({ 48391 },{ name = "Owlkin Frenzy", duration = 10 })
-AddSpell({ 48517 },{ name = "Solar Eclipse", duration = 15, short = "Solar", color = colors.ORANGE }) -- Wrath boost
-AddSpell({ 48518 },{ name = "Lunar Eclipse", duration = 15, short = "Lunar", color = colors.FROZEN }) -- Starfire boost
+-- AddSpell({ 48517 },{ name = "Solar Eclipse", duration = 15, short = "Solar", color = colors.ORANGE }) -- Wrath boost
+-- AddSpell({ 48518 },{ name = "Lunar Eclipse", duration = 15, short = "Lunar", color = colors.FROZEN }) -- Starfire boost
 AddSpell({ 50334 },{ name = "Berserk", duration = 15 })
 AddSpell({ 16870 },{ name = "Clearcasting", duration = 15 })
 

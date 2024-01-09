@@ -14,7 +14,7 @@ NugRunning.timers = timers
 local queue = {}
 local char
 local user = "Default"
-
+NugRunning.cpWas = NugRunning.cpWas or 0
 local bit_band = bit.band
 local UnitAura = UnitAura
 
@@ -51,16 +51,16 @@ function NugRunning.ADDON_LOADED(self,event,arg1)
         
         NugRunning:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
         
-        NugRunning:RegisterEvent("PLAYER_TALENT_UPDATE") -- changing between dualspec
-        NugRunning:RegisterEvent("GLYPH_UPDATED")
-        NugRunning:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
-        NugRunning.ACTIVE_TALENT_GROUP_CHANGED = NugRunning.ReInitSpells
-        NugRunning.GLYPH_UPDATED = NugRunning.ReInitSpells
-        NugRunning.PLAYER_TALENT_UPDATE = NugRunning.ReInitSpells
+        -- NugRunning:RegisterEvent("PLAYER_TALENT_UPDATE") -- changing between dualspec
+        -- NugRunning:RegisterEvent("GLYPH_UPDATED")
+        -- NugRunning:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
+        -- NugRunning.ACTIVE_TALENT_GROUP_CHANGED = NugRunning.ReInitSpells
+        -- NugRunning.GLYPH_UPDATED = NugRunning.ReInitSpells
+        -- NugRunning.PLAYER_TALENT_UPDATE = NugRunning.ReInitSpells
         
         NugRunning:RegisterEvent("PLAYER_TARGET_CHANGED")        
         
-        NugRunning:RegisterEvent("UNIT_COMBO_POINTS")
+        NugRunning:RegisterEvent("PLAYER_COMBO_POINTS")
         NugRunning:RegisterEvent("UNIT_AURA")
         
         if NugRunningDB.opts[user].cooldownsEnabled then
@@ -84,6 +84,43 @@ function NugRunning.ADDON_LOADED(self,event,arg1)
     end
 end
 
+function NugRunning.COMBAT_LOG_EVENT_UNFILTERED(self, event, timestamp, eventType, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, spellID, spellName, spellSchool, auraType, amount)
+    -- Check if the source or the destination of the event is the player
+    local playerGUID = UnitGUID("player")
+    local isSrcPlayer = srcGUID == playerGUID
+    local isDstPlayer = dstGUID == playerGUID
+
+    -- If neither the source nor the destination is the player, return
+    -- if not (isSrcPlayer or isDstPlayer) then return end
+    local isSrcPlayer = (bit.band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE)
+    
+    if TrackSpells[spellID] then
+        local isSrcPlayer = (bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE)
+        local opts = TrackSpells[spellID]
+        if not isSrcPlayer and opts.anySource then
+                srcGUID = UnitGUID("player")
+                isSrcPlayer = true
+        end
+        if opts.target and dstGUID ~= UnitGUID(opts.target) then return end
+        
+            if eventType == "SPELL_AURA_REFRESH" or eventType == "SPELL_AURA_APPLIED_DOSE" then
+                self:RefreshTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, nil, amount)
+                return
+            elseif eventType == "SPELL_AURA_APPLIED" then -- SPELL_CAST_SUCCESS
+                self:ActivateTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
+                return
+            elseif eventType == "SPELL_AURA_REMOVED" then
+                self:DeactivateTimer(srcGUID, dstGUID, spellID, spellName, opts, auraType)
+                return
+            elseif eventType == "SPELL_AURA_REMOVED_DOSE" then
+                self:RemoveDose(nil, dstGUID, spellID, spellName, amount)
+                return
+            end   
+        
+    end
+
+  --[[ Track everything
+
 function NugRunning.COMBAT_LOG_EVENT_UNFILTERED( self, event, timestamp, eventType, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, spellID, spellName, spellSchool, auraType, amount)
     local isSrcPlayer = (bit.band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE)
     
@@ -91,11 +128,11 @@ function NugRunning.COMBAT_LOG_EVENT_UNFILTERED( self, event, timestamp, eventTy
         local isSrcPlayer = (bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE)
         local opts = TrackSpells[spellID]
         if not isSrcPlayer and opts.anySource then
-                --srcGUID = UnitGUID("player")
+                srcGUID = UnitGUID("player")
                 isSrcPlayer = true
         end
         if opts.target and dstGUID ~= UnitGUID(opts.target) then return end
-        if isSrcPlayer then
+        
             if eventType == "SPELL_AURA_REFRESH" or eventType == "SPELL_AURA_APPLIED_DOSE" then
                 self:RefreshTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, nil, amount)
                 return
@@ -109,10 +146,9 @@ function NugRunning.COMBAT_LOG_EVENT_UNFILTERED( self, event, timestamp, eventTy
                 self:RemoveDose(nil, dstGUID, spellID, spellName, amount)
                 return
             end   
-        end
+        
     end
-
-    
+]]	
     
     if eventType == "UNIT_DIED" or eventType == "UNIT_DESTROYED" then
         self:DeactivateTimersOnDeath(dstGUID)
@@ -476,10 +512,9 @@ function NugRunning.PLAYER_TARGET_CHANGED(self)
     self:ArrangeTimers()
 end
 
-function NugRunning.UNIT_COMBO_POINTS(self,event,unit)
+function NugRunning.PLAYER_COMBO_POINTS(self,event,unit)
     if unit ~= "player" then return end
-    self.cpWas = self.cpNow or 0
-    self.cpNow = GetComboPoints(unit);
+    self.cpWas = GetComboPoints(unit);
 end
 
 
@@ -853,13 +888,43 @@ function NugRunning.Shine(frame)
     })
 end
 
-
-function NugRunning.SetTime(dstFlags, v )
-    if v.pvpduration then
-        if (bit.band(dstFlags, COMBATLOG_FILTER_HOSTILE_PLAYERS) == COMBATLOG_FILTER_HOSTILE_PLAYERS) then
-            return ((type(v.pvpduration) == "function" and v.pvpduration()) or v.pvpduration)
+function NugRunning.IsPvPEnemy(dstGUID)
+    -- Check if any party member's target is the given GUID and is a player enemy
+    for i = 1, GetNumPartyMembers() do
+        local unitID = "party" .. i .. "target"
+        if UnitGUID(unitID) == dstGUID and UnitIsPlayer(unitID) and UnitCanAttack("player", unitID) then
+            return true
         end
     end
+    -- Check if any raid member's target is the given GUID and is a player enemy
+    for i = 1, GetNumRaidMembers() do
+        local unitID = "raid" .. i .. "target"
+        if UnitGUID(unitID) == dstGUID and UnitIsPlayer(unitID) and UnitCanAttack("player", unitID) then
+            return true
+        end
+    end
+    return false
+end
+
+
+
+function NugRunning.SetTime(dstFlags, v)
+    if v.pvpduration then
+        -- Assuming PvP duration in battlegrounds/arenas or when the target is a hostile player
+        local inInstance, instanceType = IsInInstance()
+        local isLikelyPvP = instanceType == "arena" or instanceType == "pvp"
+        local isHostilePlayer = bit.band(dstFlags, COMBATLOG_OBJECT_TYPE_PLAYER) == COMBATLOG_OBJECT_TYPE_PLAYER and bit.band(dstFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) == 0
+		local isFriendlyPlayer = bit.band(dstFlags, COMBATLOG_OBJECT_TYPE_PLAYER) == COMBATLOG_OBJECT_TYPE_PLAYER and bit.band(dstFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) == COMBATLOG_OBJECT_REACTION_FRIENDLY
+
+        if isLikelyPvP or isHostilePlayer then
+            return ((type(v.pvpduration) == "function" and v.pvpduration()) or v.pvpduration)
+		end
+		if isLikelyPvP or isFriendlyPlayer then
+            return ((type(v.pvpduration) == "function" and v.pvpduration()) or v.pvpduration)
+       
+        end
+    end
+
     local d = ((type(v.duration) == "function" and v.duration()) or v.duration)
     if v.hasted then
         return GetHastedDuration(d)
@@ -868,7 +933,12 @@ function NugRunning.SetTime(dstFlags, v )
     end
 end
 
-local debuffUnits = {"target","mouseover","arena1","arena2","arena3","arena4","arena5","focus"}
+
+
+
+-- local debuffUnits = {"player","target","mouseover","party1","party2","party3","party4","party5","focus", "raid1", "raid2", "raid3", "raid4", "raid5", "raid6", "raid7", "raid8", "raid9", "raid10", "raid11", "raid12", "raid13", "raid14", "raid15", "raid16", "raid17", "raid18", "raid19", "raid20", "raid21", "raid22", "raid23", "raid24", "raid25"}
+local debuffUnits = {"player","target","mouseover","focus"}
+
 local buffUnits = {"player","target","mouseover"}
 
 function NugRunning.QueueAura(spellID, dstGUID, auraType, timer )
@@ -887,20 +957,28 @@ function NugRunning.QueueAura(spellID, dstGUID, auraType, timer )
 end
 
 local name, rank, texture, count, debuffType, duration, expirationTime, caster, isStealable, shouldConsolidate, spellID
-function NugRunning.UNIT_AURA (self,event,unit)
+function NugRunning.UNIT_AURA(self, event, unit)
     if not queue[unit] then return end
     for spellID, timer in pairs(queue[unit]) do
-        name, rank, texture, count, debuffType, duration, expirationTime, caster, isStealable, shouldConsolidate, spellID = UnitAura(unit, GetSpellInfo(spellID), nil, timer.filter)
-        if not name then return end
-        
-        timer.endTime = expirationTime
-        timer.startTime = expirationTime - duration
-        timer.bar:SetMinMaxValues(timer.startTime,timer.endTime)
-        timer.mark:Update()
-        
-        queue[unit][spellID] = nil
+        local name, _, _, _, _, duration, expirationTime = UnitAura(unit, GetSpellInfo(spellID), nil, timer.filter)
+        if name then
+            if type(duration) == "number" and type(expirationTime) == "number" then
+                timer.endTime = expirationTime
+                timer.startTime = expirationTime - duration
+                timer.bar:SetMinMaxValues(timer.startTime, timer.endTime)
+                timer.mark:Update()
+                queue[unit][spellID] = nil
+            else
+                -- Handle the error case here if duration or expirationTime is not a number
+                print("Error: Invalid duration or expirationTime for spellID", spellID)
+            end
+        else
+            -- If the aura is no longer present, remove it from the queue
+            queue[unit][spellID] = nil
+        end
     end
 end
+
 function NugRunning.ClearTimers(self, keepSelfBuffs)
     local timer
     for i=1,MAX_TIMERS do
