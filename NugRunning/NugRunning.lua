@@ -103,12 +103,20 @@ function NugRunning.COMBAT_LOG_EVENT_UNFILTERED(self, event, timestamp, eventTyp
         end
         if opts.target and dstGUID ~= UnitGUID(opts.target) then return end
         
+	
             if eventType == "SPELL_AURA_REFRESH" or eventType == "SPELL_AURA_APPLIED_DOSE" then
                 self:RefreshTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, nil, amount)
                 return
-            elseif eventType == "SPELL_AURA_APPLIED" then -- SPELL_CAST_SUCCESS
+			elseif eventType == "SPELL_AURA_APPLIED" then
+				local isPlayer = bit.band(dstFlags, COMBATLOG_OBJECT_TYPE_PLAYER) == COMBATLOG_OBJECT_TYPE_PLAYER or bit.band(dstFlags, COMBATLOG_OBJECT_CONTROL_PLAYER) == COMBATLOG_OBJECT_CONTROL_PLAYER
+
+				if not isPlayer then
+					if opts.Player then return end
+				end
+				if isPlayer and opts.Player then return end
+				
                 self:ActivateTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
-                return
+				return
             elseif eventType == "SPELL_AURA_REMOVED" then
                 self:DeactivateTimer(srcGUID, dstGUID, spellID, spellName, opts, auraType)
                 return
@@ -513,7 +521,7 @@ function NugRunning.PLAYER_TARGET_CHANGED(self)
 end
 
 function NugRunning.PLAYER_COMBO_POINTS(self,event,unit)
-    if unit ~= "player" then return end
+    -- if unit ~= "player" then return end
     self.cpWas = GetComboPoints(unit);
 end
 
@@ -933,7 +941,31 @@ function NugRunning.SetTime(dstFlags, v)
     end
 end
 
+--[[ -- PvP track everything
+function NugRunning.SetTime(dstFlags, v)
+    if v.pvpduration then
+        -- Assuming PvP duration in battlegrounds/arenas or when the target is a hostile player
+        local inInstance, instanceType = IsInInstance()
+        local isLikelyPvP = instanceType == "arena" or instanceType == "pvp"
+        local isHostilePlayer = bit.band(dstFlags, COMBATLOG_OBJECT_TYPE_PLAYER) == COMBATLOG_OBJECT_TYPE_PLAYER and bit.band(dstFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) == 0
+		local isFriendlyPlayer = bit.band(dstFlags, COMBATLOG_OBJECT_TYPE_PLAYER) == COMBATLOG_OBJECT_TYPE_PLAYER and bit.band(dstFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) == COMBATLOG_OBJECT_REACTION_FRIENDLY
 
+        if isLikelyPvP or isHostilePlayer then
+            return ((type(v.pvpduration) == "function" and v.pvpduration()) or v.pvpduration)
+		end
+		if isLikelyPvP or isFriendlyPlayer then
+            return ((type(v.pvpduration) == "function" and v.pvpduration()) or v.pvpduration)
+       
+        end
+    end
+
+    local d = ((type(v.duration) == "function" and v.duration()) or v.duration)
+    if v.hasted then
+        return GetHastedDuration(d)
+    else
+        return d
+    end
+end ]]
 
 
 -- local debuffUnits = {"player","target","mouseover","party1","party2","party3","party4","party5","focus", "raid1", "raid2", "raid3", "raid4", "raid5", "raid6", "raid7", "raid8", "raid9", "raid10", "raid11", "raid12", "raid13", "raid14", "raid15", "raid16", "raid17", "raid18", "raid19", "raid20", "raid21", "raid22", "raid23", "raid24", "raid25"}

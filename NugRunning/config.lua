@@ -316,57 +316,57 @@ AddSpell({ 37165 },{ name = "Haste",duration = 6, target = "player", color = col
 -- BUFFS
 -- AddSpell({ 57993 },{ name = "Envenom", color = { 0, 0.65, 0}, duration = function() return (1+NugRunning.cpWas) end })
 
-AddSpell({ 2983,8696,11305 },{ name = "Sprint",duration = 15 })
-AddSpell({ 5277,26669 },{ name = "Evasion", color = colors.PINK, duration = 15 })
-AddSpell({ 31224 },{ name = "Cloak of Shadows", color = colors.CURSE, duration = 5, short = "CloS" })
-AddSpell({ 14183 },{ name = "Premeditation",duration = 20, color = colors.CURSE })
-AddSpell({ 13750 },{ name = "Adrenaline Rush",duration = 15, color = colors.LRED })
-AddSpell({ 63848 },{ name = "Hunger For Blood", short="Hunger", duration = 60, color = colors.ORANGE })
-AddSpell({ 13877 },{ name = "Blade Flurry",duration = 15, color = colors.LRED })
-AddSpell({ 51713 },{ name = "Shadow Dance",duration = 10, color = colors.LRED })
-AddSpell({ 58427 },{ name = "Overkill", duration = 20, color =  colors.RED })                    
+AddSpell({ 2983,8696,11305 },{ name = "Sprint", target = "player", duration = 15 })
+AddSpell({ 5277,26669 },{ name = "Evasion", target = "player", color = colors.PINK, duration = 15 })
+AddSpell({ 31224 },{ name = "Cloak of Shadows", target = "player", color = colors.CURSE, duration = 5, short = "CloS" })
+AddSpell({ 14183 },{ name = "Premeditation", target = "player", duration = 20, color = colors.CURSE })
+AddSpell({ 13750 },{ name = "Adrenaline Rush", target = "player", duration = 15, color = colors.LRED })
+-- AddSpell({ 63848 },{ name = "Hunger For Blood", short="Hunger", duration = 60, color = colors.ORANGE })
+AddSpell({ 13877 },{ name = "Blade Flurry", target = "player", duration = 15, color = colors.LRED })
+-- AddSpell({ 51713 },{ name = "Shadow Dance",duration = 10, color = colors.LRED })
+-- AddSpell({ 58427 },{ name = "Overkill", duration = 20, color =  colors.RED })                    
                 
-AddSpell({ 5171,6774 },{ name = "Slice and Dice", short = "SnD", color = colors.PURPLE, duration = function() return ((7 + NugRunning.cpWas * 3) * (1+Talent(14165)*0.25)) end })
-AddSpell({ 31234,31235,31236 },{ name = "Find Weakness",duration = 10 })
+AddSpell({ 5171,6774 },{ name = "Slice and Dice", short = "SnD", color = colors.PURPLE, target = "player", duration = function() return ((7 + NugRunning.cpWas * 3) * (1+Talent(14165)*0.25)) end })
+AddSpell({ 31234,31235,31236 },{ name = "Find Weakness", target = "player", duration = 10 })
 
-AddSpell({ 11327,11329,26888 },{ name = "Vanish",duration = 10 })
-AddSpell({ 45182 },{ name = "Cheating Death",duration = 3 })
-AddSpell({ 14143, 14149 },{ name = "Remorseless",duration = 20 })
-AddSpell({ 36554 },{ name = "Shadowstep speed",duration = 3 })
-AddSpell({ 36563 },{ name = "Shadowstep damage",duration = 10 })
+AddSpell({ 11327,11329,26888 },{ name = "Vanish", target = "player", duration = 10 })
+AddSpell({ 45182 },{ name = "Cheating Death", target = "player", duration = 3 })
+AddSpell({ 14143, 14149 },{ name = "Remorseless", target = "player", duration = 20 })
+AddSpell({ 36554 },{ name = "Shadowstep speed", target = "player", duration = 3 })
+AddSpell({ 36563 },{ name = "Shadowstep damage", target = "player", duration = 10 })
 --~ 
 -- DEBUFFS
-AddSpell({ 1833 },{ name = "Cheap Shot",duration = 4, pvpduration = 4, color = colors.LRED })
-AddSpell({ 408 },{ name = "Kidney Shot",duration = function() return (1 + NugRunning.cpWas * 1) end, pvpduration = function() return (1 + NugRunning.cpWas * 1) end, color = colors.LRED })
-AddSpell({ 8643 },{ name = "Kidney Shot",duration = function() return (2 + NugRunning.cpWas * 1) end, pvpduration = function() return (2 + NugRunning.cpWas * 1) end, color = colors.LRED })
-AddSpell({ 1776, 1777, 8629, 11285, 11286, 38764 },{ name = "Gouge", color = colors.PINK, duration = 4, pvpduration = 4, init = function(self)self.duration = 4 + Talent(13741)*0.5 end })
-AddSpell({ 2094 },{ name = "Blind",duration = 10, pvpduration = 10, color = {0.20, 0.80, 0.2} })
-AddSpell({ 8647, 8649, 8650, 11197, 11198, 26866 },{ name = "Expose Armor", color = colors.LBLUE, duration = 30 --[[function() return NugRunning.cpWas * 6 + Glyph(56803)*12 end]] })
-AddSpell({ 51722 },{ name = "Dismantle",duration = 10,color = colors.LRED })
+AddSpell({ 1833 },{ name = "Cheap Shot",duration = 4, pvpduration = 4, Player = true, color = colors.LRED })
+AddSpell({ 408 },{ name = "Kidney Shot",duration = function() return (1 + NugRunning.cpWas * 1) end, pvpduration = 4, Player = true, color = colors.LRED })
+AddSpell({ 8643 },{ name = "Kidney Shot",duration = function() return (2 + NugRunning.cpWas * 1) end, pvpduration = 5, Player = true, color = colors.LRED })
+AddSpell({ 1776, 1777, 8629, 11285, 11286, 38764 },{ name = "Gouge", color = colors.PINK, duration = 4, pvpduration = 4, Player = true, init = function(self)self.duration = 4 + Talent(13741)*0.5 end, init = function(self)self.pvpduration = 4 + Talent(13741)*0.5 end })
+AddSpell({ 2094 },{ name = "Blind",duration = 10, pvpduration = 10, Player = true, color = {0.20, 0.80, 0.2} })
+AddSpell({ 8647, 8649, 8650, 11197, 11198, 26866 },{ name = "Expose Armor", Player = true, color = colors.LBLUE, duration = 30 --[[function() return NugRunning.cpWas * 6 + Glyph(56803)*12 end]] })
+-- AddSpell({ 51722 },{ name = "Dismantle",duration = 10,color = colors.LRED })
 
-AddSpell({ 6770 },{ name = "Sap",duration = 25, pvpduration = 10, color = colors.LBLUE })
-AddSpell({ 2070 },{ name = "Sap",duration = 35, pvpduration = 10, color = colors.LBLUE })
-AddSpell({ 11297 },{ name = "Sap",duration = 45, pvpduration = 10, color = colors.LBLUE })
-AddSpell({ 51724 },{ name = "Sap",duration = 60, pvpduration = 10, color = colors.LBLUE })
+AddSpell({ 6770 },{ name = "Sap",duration = 25, pvpduration = 10, Player = true, color = colors.LBLUE })
+AddSpell({ 2070 },{ name = "Sap",duration = 35, pvpduration = 10, Player = true, color = colors.LBLUE })
+AddSpell({ 11297 },{ name = "Sap",duration = 45, pvpduration = 10, Player = true, color = colors.LBLUE })
+AddSpell({ 51724 },{ name = "Sap",duration = 60, pvpduration = 10, Player = true, color = colors.LBLUE })
 
-AddSpell({ 1943,8639,8640,11273,11274,11275,26867,48671,48672 },{ name = "Rupture", color = colors.RED, duration = function() return (8 + NugRunning.cpWas * 2) end})
-AddSpell({ 703,8631,8632,8633,11289,11290,26839,26884,48675,48676,42964 },{ name = "Garrote", color = colors.RED, duration = 18 })
-AddSpell({ 1330 },{ name = "Silence", color = colors.PINK, duration = 3 })
-AddSpell({ 18425 },{ name = "Silenced", color = colors.PINK, duration = 3 })
-AddSpell({ 16511, 17347, 17348, 26864 },{ name = "Hemorrhage", color = colors.RED, duration = 15 })
-AddSpell({ 14278 },{ name = "Ghostly Strike", color = colors.PURPLE, duration = 7 })
-AddSpell({ 32748 },{ name = "Deadly Throw Interrupt", color = colors.PINK, duration = 3 })
+AddSpell({ 1943,8639,8640,11273,11274,11275,26867,48671,48672 },{ name = "Rupture", Player = true, color = colors.RED, duration = function() return (8 + NugRunning.cpWas * 2) end})
+AddSpell({ 703,8631,8632,8633,11289,11290,26839,26884,48675,48676,42964 },{ name = "Garrote", Player = true, color = colors.RED, duration = 18 })
+AddSpell({ 1330 },{ name = "Silence", Player = true, color = colors.PINK, duration = 3 })
+AddSpell({ 18425 },{ name = "Silenced", Player = true, color = colors.PINK, duration = 3 })
+AddSpell({ 16511, 17347, 17348, 26864 },{ name = "Hemorrhage", Player = true, color = colors.RED, duration = 15 })
+AddSpell({ 14278 },{ name = "Ghostly Strike", Player = true, color = colors.PURPLE, duration = 7 })
+AddSpell({ 32748 },{ name = "Deadly Throw Interrupt", Player = true, color = colors.PINK, duration = 3 })
 
-AddSpell({ 2818,2819,11353,11354,25349,26968,27187,57969,57970}, { name = "Deadly Poison", color = { 0.1, 0.75, 0.1}, duration = 12, short = "Deadly"})
+AddSpell({ 2818,2819,11353,11354,25349,26968,27187,57969,57970}, { name = "Deadly Poison", color = { 0.1, 0.75, 0.1}, duration = 12, Player = true, short = "Deadly"})
 
-AddSpell({ 3409 },{ name = "Crippling Poison", color = { 192/255, 77/255, 48/255}, duration = 12, short = "Crippling" }) -- -50% move speed
-AddSpell({ 11201 },{ name = "Crippling Poison", color = { 192/255, 77/255, 48/255}, duration = 12, short = "Crippling" }) -- -70% move speed
+AddSpell({ 3409 },{ name = "Crippling Poison", color = { 192/255, 77/255, 48/255}, duration = 12, Player = true, short = "Crippling" }) -- -50% move speed
+AddSpell({ 11201 },{ name = "Crippling Poison", color = { 192/255, 77/255, 48/255}, duration = 12, Player = true, short = "Crippling" }) -- -70% move speed
 
-AddSpell({ 5760 }, { name = "Mind-numbing Poison", color = { 180/255, 70/255, 40/255 }, duration = 10, short = "Mind-numbing"})
-AddSpell({ 8692 }, { name = "Mind-numbing Poison", color = { 180/255, 70/255, 40/255 }, duration = 12, short = "Mind-numbing"})
-AddSpell({ 11398 }, { name = "Mind-numbing Poison", color = { 180/255, 70/255, 40/255 }, duration = 14, short = "Mind-numbing"})
+AddSpell({ 5760 }, { name = "Mind-numbing Poison", color = { 180/255, 70/255, 40/255 }, duration = 10, Player = true, short = "Mind-numbing"})
+AddSpell({ 8692 }, { name = "Mind-numbing Poison", color = { 180/255, 70/255, 40/255 }, duration = 12, Player = true, short = "Mind-numbing"})
+AddSpell({ 11398 }, { name = "Mind-numbing Poison", color = { 180/255, 70/255, 40/255 }, duration = 14, Player = true, short = "Mind-numbing"})
 
-AddSpell({ 13218, 13222, 13223, 13224, 27189 },{ name = "Wound Poison", color = { 195/255, 80/255, 50/255}, duration = 15, short = "Wound" })
+AddSpell({ 13218, 13222, 13223, 13224, 27189 },{ name = "Wound Poison", color = { 195/255, 80/255, 50/255}, duration = 15, Player = true, short = "Wound" })
 
 end
 
