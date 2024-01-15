@@ -93,13 +93,14 @@ local procTrinkets = true
 local stackingTrinkets = true
 if useTrinkets then
     AddSpell({ 33702,33697,20572 },{ name = "Blood Fury", duration = 15 }) --Orc Racial
-    AddSpell({ 26297, 26296, 20554 },{ name = "Berserking", duration = 10 }) --Troll Racial
+    AddSpell({ 26297, 26296, 26635, 20554 },{ name = "Berserking", duration = 10 }) --Troll Racial
     AddSpell({ 20594 },{ name = "Stoneform", duration = 8 }) --Dwarf Racial
     AddSpell({ 20549 },{ name = "War Stomp", duration = 2, multiTarget = true }) --Tauren Racial
     AddSpell({ 7744 },{ name = "Will of the Forsaken", duration = 5 }) --Undead Racial
     AddSpell({ 44041, 44043, 44044, 44045, 44046, 44047 },{ name = "Chastise", duration = 2 }) --Priest Dwarf/Draenei spell
     AddSpell({ 28730, 25046 },{ name = "Arcane Torrent", duration = 2, multiTarget = true }) --Blood elf Racial
     AddSpell({ 2651 },{ name = "Elune's Grace", duration = 15 }) --Priest Night elf spell
+	AddSpell({ 20600 },{ name = "Perception", duration = 15 }) --Human Racial
    
     -- Bombs/Grenades
     AddSpell({ 4067 },{ name = "Big Bronze Bomb", duration = 2, multiTarget = true })
@@ -129,8 +130,8 @@ if useTrinkets then
     AddSpell({ 40402 },{ name = "Deep Meditation",duration = 20, target = "player" }) --Earring of Soulful Meditation
     AddSpell({ 33807 },{ name = "DeepHaste",duration = 10, target = "player" }) --Abacus of Violent Odds
     AddSpell({ 35163 },{ name = "Blessing of the Silver Crescent",duration = 20, target = "player" }) --Icon of the Silver Crescent
-    AddSpell({ 34210 },{ name = "Endless Blessings",duration = 20, target = "player" }) -- Bangle of Endless Blessings Use
-    AddSpell({ 40396 },{ name = "Fel Infusion",duration = 20, target = "player" }) -- The Skull of Gul'dan
+    AddSpell({ 34210 },{ name = "Endless Blessings",duration = 20, target = "player" }) -- Bangle of Endless Blessings
+    AddSpell({ 40396, 40394 },{ name = "Fel Infusion",duration = 20, target = "player" }) -- The Skull of Gul'dan
     AddSpell({ 33089, 33090 },{ name = "Vigilance of the Colossus",duration = 20, target = "player" }) -- Figurine of the Colossus
     AddSpell({ 35169 },{ name = "Gnome Ingenuity",duration = 20, target = "player" }) -- Gnomeregan Auto-Blocker 600
     AddSpell({ 43712 },{ name = "Mojo Madness",duration = 20, target = "player" }) -- Hex Shrunken Head
@@ -139,10 +140,10 @@ if useTrinkets then
     AddSpell({ 44055 },{ name = "Tremendous Fortitude",duration = 15, target = "player" }) -- Battlemaster's trinkets
     AddSpell({ 39228 },{ name = "Argussian Compass",duration = 20, target = "player" }) -- Argussian Compass
     AddSpell({ 34106 },{ name = "Armor Penetration",duration = 20, target = "player" }) -- Icon of Unyielding Courage
-    AddSpell({ 35337 },{ name = "Spell Power",duration = 15, target = "player" }) -- Scryer's Bloodgem & Xi'ri's Gift
-    AddSpell({ 40464 },{ name = "Protector's Vigor",duration = 20, target = "player" }) -- Shadowmoon Insignia
+    AddSpell({ 35337, 36432, 39201, 32925 },{ name = "Spell Power",duration = 15, target = "player" }) -- Scryer's Bloodgem & Xi'ri's Gift
+    AddSpell({ 40464, 40456	},{ name = "Protector's Vigor",duration = 20, target = "player" }) -- Shadowmoon Insignia
     AddSpell({ 46784 },{ name = "Shadowsong Panther",duration = 15, target = "player" }) -- Figurine - Shadowsong Panther
-    AddSpell({ 37877 },{ name = "Blessing of Faith",duration = 15, target = "player" }) -- Lower City Prayerbook
+    AddSpell({ 37880, 37881, 37878, 37879, 37877 },{ name = "Blessing of Faith",duration = 15, target = "player" }) -- Lower City Prayerbook
     AddSpell({ 43716 },{ name = "Call of the Berserker",duration = 20, target = "player" }) -- Berserker's Call
     AddSpell({ 51955 },{ name = "Dire Drunkard",duration = 20, target = "player" }) -- Empty Mug of Direbrew
     AddSpell({ 51954 },{ name = "Hopped Up",duration = 20, target = "player" }) -- Direbrew Hops
@@ -162,7 +163,43 @@ if useTrinkets then
     AddSpell({ 36347 },{ name = "Healing Power",duration = 15, target = "player" }) -- Heavenly Inspiration
     AddSpell({ 33667 },{ name = "Ferocity",duration = 15, target = "player" }) -- Bladefist's Breadth & Ancient Draenei War Talisman
     AddSpell({ 33662 },{ name = "Arcane Energy",duration = 15, target = "player" }) -- Vengeance of the Illidari & Ancient Draenei Arcane Relic
-    AddSpell({ 33668 },{ name = "Tenacity",duration = 15, target = "player" }) -- Regal Protectorate
+    AddSpell({ 33668, 40538, 45049 },{ name = "Tenacity",duration = 15, target = "player" }) -- Regal Protectorate
+	AddSpell({ 44389 },{ name = "Field Repair Bot 110G",duration = 600 }) -- Field Repair Bot 110G
+	
+	-- (doesn't work no event fire for this)
+	AddSpell({ 28726, 22797 },{ name = "Nightmare Seed",duration = 30, target = "player" }) -- Nightmare Seed 
+	AddSpell({ 28714 },{ name = "Flame Cap",duration = 60, target = "player" }) -- Flame Cap
+	AddSpell({ 28527 },{ name = "Fel Blossom",duration = 15, target = "player" }) -- Fel Blossom
+	
+	
+	
+	-- Drums
+	AddSpell({ 35476 },{ name = "Drums of Battle",duration = 30, target = "player" }) -- Drums of Battle
+	AddSpell({ 35475, 39864 },{ name = "Drums of War",duration = 30, target = "player" }) -- Drums of War
+	AddSpell({ 35477, 39863 },{ name = "Drums of Speed",duration = 30, target = "player" }) -- Drums of Speed
+	AddSpell({ 35478 },{ name = "Drums of Restoration",duration = 15, target = "player" }) -- Drums of Restoration
+	AddSpell({ 35474 },{ name = "Drums of Panic",duration = 2, multiTarget = true }) -- Drums of Panic
+	
+	-- Potions
+	AddSpell({ 6615 },{ name = "Free Action",duration = 30, target = "player" }) -- Free Action Potion
+	AddSpell({ 28507 },{ name = "Haste",duration = 15, target = "player" }) -- Haste Potion
+	AddSpell({ 28508 },{ name = "Destruction",duration = 15, target = "player" }) -- Destruction Potion
+	AddSpell({ 24364 },{ name = "Living Free Action",duration = 5, target = "player" }) -- Living Action Potion
+	AddSpell({ 11392 },{ name = "Invisibility",duration = 18, target = "player" }) -- Invisibility Potion
+	AddSpell({ 3680 },{ name = "Lesser Invisibility",duration = 15, target = "player" }) -- Lesser Invisibility Potion
+	AddSpell({ 2379 },{ name = "Speed",duration = 15, target = "player" }) -- Swiftness Potion
+	AddSpell({ 38929 },{ name = "Fel Mana",duration = 24, target = "player" }) -- Fel Mana Potion
+	AddSpell({ 28515 },{ name = "Ironshield",duration = 120, target = "player" }) -- Ironshield Potion
+	AddSpell({ 28537 },{ name = "Shadow Protection",duration = 120, target = "player" }) -- Major Shadow Protection Potion
+	AddSpell({ 11406 },{ name = "Elixir of Demonslaying",duration = 300, target = "player" }) -- Elixir of Demonslaying
+	AddSpell({ 17528 },{ name = "Mighty",duration = 15 }) -- Mighty Rage Potion
+	AddSpell({ 28494 },{ name = "Insane Strength",duration = 15 }) -- Insane Strength Potion
+	AddSpell({ 11350 },{ name = "Fire Shield",duration = 15 }) -- Oil of Immolation
+	
+	
+	-- Other
+	 AddSpell({ 13494 },{ name = "Haste",duration = 30, target = "player" }) -- Manual Crowd Pummeler
+	
 end
 
 if procTrinkets then
@@ -176,18 +213,20 @@ if procTrinkets then
     -- TBC
     AddSpell({ 34774, 34775 },{ name = "Haste",duration = 10, target = "player" }) -- Dragonspine Trophy
     AddSpell({ 39446 },{ name = "Aura of Madness",duration = 30, target = "player" }) -- Darkmoon Card: Madness
-    AddSpell({ 33297, 33370 },{ name = "Spell Haste",duration = 6, target = "player" }) -- Quagmirran's Eye
+    AddSpell({ 33297, 33370, 33953 },{ name = "Spell Haste",duration = 6, target = "player" }) -- Quagmirran's Eye, Scarab of the Infinite Cycle, 
     AddSpell({ 37705 },{ name = "Healing Discount",duration = 15, target = "player" }) -- Eye of Gruul
     AddSpell({ 45053, 45354 },{ name = "Disdain",duration = 20, target = "player" }) -- Shard of Contempt
-    AddSpell({ 42084 },{ name = "Fury of the Crashing Waves",duration = 10, target = "player" }) -- Tsunami Talisman
-    AddSpell({ 38346 },{ name = "Meditation",duration = 15, target = "player" }) -- Bangle of Endless Blessings proc
-    AddSpell({ 33649 },{ name = "Rage of the Unraveller",duration = 10, target = "player" }) -- Hourglass of the Unraveller
-    AddSpell({ 34321 },{ name = "Call of the Nexus",duration = 10, target = "player" }) -- Shiffar's Nexus-Horn
-    AddSpell({ 34747 },{ name = "Recurring Power",duration = 10, target = "player" }) -- Eye of Magtheridon
-    AddSpell({ 33370 },{ name = "Spell Haste",duration = 6, target = "player" }) -- Scarab of the Infinite Cycle
-    AddSpell({ 40477 },{ name = "Forceful Strike",duration = 10, target = "player" }) -- Madness of the Betrayer
-    AddSpell({ 38348 },{ name = "Unstable Currents",duration = 15, target = "player" }) -- Sextant of Unstable Currents
-    AddSpell({ 45058 },{ name = "Evasive Maneuvers",duration = 10, target = "player" }) -- Commendation of Kael'thas
+    AddSpell({ 42084, 42083 },{ name = "Fury of the Crashing Waves",duration = 10, target = "player" }) -- Tsunami Talisman
+    AddSpell({ 38346, 21894 },{ name = "Meditation",duration = 15, target = "player" }) -- Bangle of Endless Blessings proc
+    AddSpell({ 33649, 33648 },{ name = "Rage of the Unraveller",duration = 10, target = "player" }) -- Hourglass of the Unraveller
+    AddSpell({ 34321, 34320 },{ name = "Call of the Nexus",duration = 10, target = "player" }) -- Shiffar's Nexus-Horn
+    AddSpell({ 34747, 34749 },{ name = "Recurring Power",duration = 10, target = "player" }) -- Eye of Magtheridon
+    AddSpell({ 40477, 40475 },{ name = "Forceful Strike",duration = 10, target = "player" }) -- Madness of the Betrayer
+    AddSpell({ 38348, 38347 },{ name = "Unstable Currents",duration = 15, target = "player" }) -- Sextant of Unstable Currents
+    AddSpell({ 45058, 45057 },{ name = "Evasive Maneuvers",duration = 10, target = "player" }) -- Commendation of Kael'thas
+	
+	-- Other
+	 AddSpell({ 13533 },{ name = "Haste",duration = 10, target = "player" }) -- The Jackhammer
 end
 
 if stackingTrinkets then
@@ -198,7 +237,7 @@ if stackingTrinkets then
     --TBC
     AddSpell({ 39438 },{ name = "Aura of the Crusade",duration = 10, target = "player" }) -- Darkmoon Card: Crusade
     AddSpell({ 39443 },{ name = "Aura of Wrath",duration = 10, target = "player" }) -- Darkmoon Card: Wrath
-    AddSpell({ 38333 },{ name = "Fecundity",duration = 10, target = "player" }) -- Ribbon of Sacrifice
+    AddSpell({ 38332, 38333 },{ name = "Fecundity",duration = 10, target = "player" }) -- Ribbon of Sacrifice
     AddSpell({ 45062 },{ name = "Holy Energy",duration = 90, target = "player" }) -- Vial of the Sunwell
     AddSpell({ 45040 },{ name = "Battle Trance",duration = 20, target = "player" }) -- Blackened Naaru Sliver
 end
@@ -213,39 +252,38 @@ AddSpell({ 39437 },{ name = "Shadowflame Hellfire and RoF",duration = 15, target
 
 
 -- BUFFS
-AddSpell({ 63321 },{ name = "Life Tap",duration = 20, color = colors.PURPLE })
-AddSpell({ 34936 },{ name = "Backlash",duration = 8 })
+AddSpell({ 63321 },{ name = "Life Tap",duration = 20, target = "player", color = colors.PURPLE })
+AddSpell({ 34936 },{ name = "Backlash",duration = 8, target = "player" })
 --~ AddSpell({ 54274,54276,54277 },{ name = "Backdraft",duration = 15 })
-AddSpell({ 17941 },{ name = "Nightfall",duration = 10, color = colors.CURSE })
-AddSpell({ 30300 },{ name = "Nether Protection",duration = 4, color = colors.LRED })
-AddSpell({ 47383,71162,71165 },{ name = "Molten Core",duration = 18, color = colors.PURPLE })
-AddSpell({ 6229, 11739, 11740, 28610 },{ name = "Shadow Ward",duration = 30, color = colors.PURPLE })
-AddSpell({ 63167,63165 },{ name = "Decimation",duration = 8, color = colors.LBLUE })
+AddSpell({ 17941 },{ name = "Nightfall",duration = 10, target = "player", color = colors.CURSE })
+AddSpell({ 30300 },{ name = "Nether Protection",duration = 4, target = "player", color = colors.LRED })
+-- AddSpell({ 47383,71162,71165 },{ name = "Molten Core",duration = 18, color = colors.PURPLE })
+AddSpell({ 6229, 11739, 11740, 28610 },{ name = "Shadow Ward",duration = 30, target = "player", color = colors.PURPLE })
+-- AddSpell({ 64371 },{ name = "Eradication",duration = 10, color = colors.CURSE })
 
-AddSpell({ 64371 },{ name = "Eradication",duration = 10, color = colors.CURSE })
-AddSpell({ 17794, 17797, 17798, 17799, 17799 },{ name = "Shadow Vulnerability",duration = 12, color = colors.PURPLE })
-
-
-AddSpell({ 27243,47835,47836 },{ name = "Seed of Corruption",duration = 15, color = colors.LRED, short = "SoC" })
 -- DEBUFFS
-AddSpell({348, 707, 1094, 2941, 11665, 11667, 11668, 25309, 27215, 47810, 47811 },{ name = "Immolate", recast_mark = "gcd", duration = 15, color = colors.RED })
-AddSpell({ 30108, 30404, 30405, 47841, 47843 },{ name = "Unstable Affliction",duration = 18, recast_mark = "gcd", color = colors.RED, short = "UA" })  -- 15 sec duration on wotlk
-AddSpell({ 31117, 43523 },{ name = "Unstable Affliction",duration = 5, color = colors.PURPLE }) -- UA silence
+AddSpell({ 17794, 17797, 17798, 17799, 17800 },{ name = "Shadow Vulnerability",duration = 12, Player = true, color = colors.PURPLE })
+AddSpell({ 27243 },{ name = "Seed of Corruption",duration = 18, color = colors.LRED, Player = true, short = "SoC" })
+AddSpell({ 17862,17937,27229 },{ name = "Curse of Shadow",duration = 300, color = colors.CURSE, Player = true, pvpduration = 120 })
+AddSpell({348, 707, 1094, 2941, 11665, 11667, 11668, 25309, 27215, 47810, 47811 },{ name = "Immolate", recast_mark = "gcd", Player = true, duration = 15, color = colors.RED })
+AddSpell({ 30108, 30404, 30405, 47841, 47843 },{ name = "Unstable Affliction",duration = 18, recast_mark = "gcd", Player = true, color = colors.RED, short = "UA" })  -- 15 sec duration on wotlk
+AddSpell({ 31117, 43523 },{ name = "UA Silence",duration = 5, Player = true, color = colors.PURPLE }) -- UA silence
 
-AddSpell({ 172,6222,6223,7648,11671,11672,25311,27216 --[[ ,47812,47813]] },{ name = "Corruption", color = colors.PINK, duration = 18, init = function(self)
-                                                                                                                                self.hasted = (Glyph(70947) ~= 0) end })
-AddSpell({ 18265,18879,18880,18881,27264,30911 },{ name = "Siphon Life", color = colors.PINK, duration = 30 })
-AddSpell({ 980,1014,6217,11711,11712,11713,27218 --[[ ,47863,47864]] },{ name = "Curse of Agony",duration = 24, color = colors.CURSE, short = "Agony", init = function(self)self.duration = 24 + Glyph(56241)*4 end })
-AddSpell({ 603, 30910 --[[ , 47867]] },{ name = "Curse of Doom",duration = 60, color = colors.CURSE, short = "Doom" })
-AddSpell({ 704, 7658, 7659, 11717, 27226 },{ name = "Curse of Recklessness",duration = 120, color = colors.CURSE, short = "Recklessness" })
-AddSpell({ 1714,11719 },{ name = "Curse of Tongues",duration = 30, color = colors.CURSE, pvpduration = 12, short = "CoT" })
-AddSpell({ 702,1108,6205,7646,11707,11708,27224,30909 --[[,50511]] },{ name = "Curse of Weakness",duration = 120, color = colors.CURSE, short = "Weakness" })
-AddSpell({ 18223 },{ name = "Curse of Exhaustion",duration = 12, color = colors.CURSE, short = "CoEx" })
+AddSpell({ 172 },{ name = "Corruption", color = colors.PINK, Player = true, duration = 12 })
+AddSpell({ 6222 },{ name = "Corruption", color = colors.PINK, Player = true, duration = 15 })
+AddSpell({ 6223,7648,11671,11672,25311,27216 },{ name = "Corruption", color = colors.PINK, Player = true, duration = 18 })
+AddSpell({ 18265,18879,18880,18881,27264,30911 },{ name = "Siphon Life", color = colors.PINK, Player = true, duration = 30 })
+AddSpell({ 980,1014,6217,11711,11712,11713,27218 },{ name = "Curse of Agony", Player = true, duration = 24, color = colors.CURSE, short = "Agony" })
+AddSpell({ 603, 30910 },{ name = "Curse of Doom",duration = 60, Player = true, color = colors.CURSE, short = "Doom" })
+AddSpell({ 704, 7658, 7659, 11717, 27226 },{ name = "Curse of Recklessness",duration = 120, Player = true, color = colors.CURSE, short = "Recklessness" })
+AddSpell({ 1714,11719 },{ name = "Curse of Tongues",duration = 30, color = colors.CURSE, pvpduration = 12, Player = true, short = "CoT" })
+AddSpell({ 702,1108,6205,7646,11707,11708,27224,30909 },{ name = "Curse of Weakness",duration = 120, Player = true, color = colors.CURSE, short = "Weakness" })
+AddSpell({ 18223 },{ name = "Curse of Exhaustion",duration = 12, color = colors.CURSE, Player = true, short = "CoEx" })
 
 -- AddSpell({ 48181,59161,59163,59164 },{ name = "",duration = 12, recast_mark = 3, color = colors.TEAL }) --Haunt
-AddSpell({ 1490,11721,11722,27228 --[[,47865]] },{ name = "Curse of Elements",duration = 300, color = colors.CURSE, pvpduration = 120, short = "CoE" })
-AddSpell({ 30283,30413,30414,47846,47847 },{ name = "Shadowfury",duration = 2, multiTarget = true }) -- 3 sec duration on wotlk
-AddSpell({ 47960,61291 },{ name = "Shadowflame",duration = 8, multiTarget = true })
+AddSpell({ 1490,11721,11722,27228 --[[,47865]] },{ name = "Curse of Elements", duration = 300, Player = true, color = colors.CURSE, pvpduration = 120, short = "CoE" })
+AddSpell({ 30283,30413,30414,47846,47847 },{ name = "Shadowfury",duration = 2, Player = true, multiTarget = true }) -- 3 sec duration on wotlk
+-- AddSpell({ 47960,61291 },{ name = "Shadowflame",duration = 8, multiTarget = true })
 --PET SPELLS
 AddSpell({ 24259 },{ name = "Spell Lock",duration = 3, color = colors.PINK })
 AddSpell({ 6358 },{ name = "Seduction",duration = 15, pvpduration = 10 })
@@ -253,16 +291,17 @@ AddSpell({ 17767,17850,17851,17852,17853,17854,27272,47987,47988 },{ name = "Con
 AddSpell({ 30153,30195,30197,47995 },{ name = "Intercept",duration = 3 })
 AddSpell({ 7812,19438,19440,19441,19442,19443,27273,47985,47986 },{ name = "Sacrifice",duration = 30, color = colors.PURPLE })
 --
-AddSpell({ 5782 },{ name = "Fear", duration = 10, pvpduration = 10 })
-AddSpell({ 6213 },{ name = "Fear", duration = 15, pvpduration = 10 })
-AddSpell({ 6215 },{ name = "Fear", duration = 20, pvpduration = 10 })
+AddSpell({ 5782 },{ name = "Fear", duration = 10, Player = true, pvpduration = 10 })
+AddSpell({ 6213 },{ name = "Fear", duration = 15, Player = true, pvpduration = 10 })
+AddSpell({ 6215 },{ name = "Fear", duration = 20, Player = true, pvpduration = 10 })
 --
 AddSpell({ 5484 },{ name = "Howl of Terror", duration = 6, multiTarget = true })                    
 AddSpell({ 17928 },{ name = "Howl of Terror", duration = 8, multiTarget = true })
 
-AddSpell({ 710 },{ name = "Banish", duration = 20 })
-AddSpell({ 18647 },{ name = "Banish", duration = 30 })
-AddSpell({ 6789, 17925, 17926, 27223 },{ name = "Death Coil",duration = 3 })
+AddSpell({ 710 },{ name = "Banish", Player = true, duration = 20 })
+AddSpell({ 18647 },{ name = "Banish", Player = true, duration = 30 })
+AddSpell({ 6789, 17925, 17926, 27223 },{ name = "Death Coil", Player = true, duration = 3 })
+
 -- AddCooldown( 59172, { name = "Chaos Bolt",  color = colors.LBLUE })
 AddCooldown( 17962, { name = "Conflagrate",  color = colors.LRED })
 --AddCooldown( 59164, { name = "HAUNT",  color = colors.LRED })
@@ -294,55 +333,53 @@ AddSpell({ 59891,59890,59889,59888,59887 },{ name = "Borrowed Time", duration = 
 AddSpell({ 453, 8192, 10953, 25596 },{ name = "Mind Soothe",duration = 15 })
 AddSpell({ 15269 },{ name = "Blackout",duration = 3, color = colors.LRED })
 AddSpell({ 589,594,970,992,2767,10892,10893,10894,25367,25368,48124,48125 },{ name = "Shadow Word: Pain",duration = 18, color = colors.PURPLE, refreshed = true, tick = 3, short = "SW:Pain" })
-AddSpell({ 34914,34916,34917,48159,48160 },{ name = "Vampiric Touch", recast_mark = "gcd", duration = 15, color = colors.RED, short = "VampTouch", hasted = true })
-AddSpell({ 2944,19276,19277,19278,19279,19280,25467,48299,48300 },{ name = "Devouring Plague",duration = 24, color = colors.CURSE, short = "Plague", hasted = true })
+AddSpell({ 34914,34916,34917 },{ name = "Vampiric Touch", recast_mark = "gcd", duration = 15, color = colors.RED, short = "VampTouch", hasted = true })
+AddSpell({ 2944,19276,19277,19278,19279,19280,25467,48299,48300 },{ name = "Devouring Plague",duration = 24, color = colors.CURSE, short = "Plague", hasted = true }) -- Undead
 AddSpell({ 9484,9485,10955 },{ name = "Shackle Undead",duration = 50, pvpduration = 10, short = "Shackle" })
 AddSpell({ 15487 },{ name = "Silence",duration = 5, color = colors.PINK })
---AddSpell({ 15286 },{ name = "Vampiric Embrace",duration = 300, color = colors.CURSE, short = "VampEmbrace" })
+AddSpell({ 15286 },{ name = "Vampiric Embrace",duration = 60, color = colors.CURSE, short = "VampEmbrace" })
 AddSpell({ 8122,8124,10888,10890 },{ name = "Psychic Scream",duration = 8, multiTarget = true })
 AddSpell({ 34433 },{ name = "Shadowfiend",duration = 15, color = colors.LBLUE })
-AddSpell({ 34433, 19296, 19299, 19302, 19303, 19304, 19305, 25446 },{ name = "Starshards",duration = 15, color = colors.PURPLE, tick = 3 })
+AddSpell({ 10797, 19296, 19299, 19302, 19303, 19304, 19305, 25446 },{ name = "Starshards",duration = 15, color = colors.PURPLE, tick = 3 }) -- Night Elf / Draenei
+AddSpell({ 32548 },{ name = "Symbol of Hope",duration = 15, color = colors.LBLUE }) -- Draenei
 AddSpell({ 34754 },{ name = "Clearcasting", duration = 15 })
 
-AddCooldown( 8092, { name = "Mind Blast",  color = colors.LRED })
+-- AddCooldown( 8092, { name = "Mind Blast",  color = colors.LRED })
 
 end
 
 
 if class == "ROGUE" then
 
-AddSpell({ 37165 },{ name = "Haste",duration = 6, target = "player", color = colors.LRED }) -- t3.5 2pc proc
+AddSpell({ 37165, 37163 },{ name = "Haste",duration = 6, target = "player", color = colors.LRED }) -- t3.5 2pc proc
 
 -- BUFFS
--- AddSpell({ 57993 },{ name = "Envenom", color = { 0, 0.65, 0}, duration = function() return (1+NugRunning.cpWas) end })
 
 AddSpell({ 2983,8696,11305 },{ name = "Sprint", target = "player", duration = 15 })
 AddSpell({ 5277,26669 },{ name = "Evasion", target = "player", color = colors.PINK, duration = 15 })
 AddSpell({ 31224 },{ name = "Cloak of Shadows", target = "player", color = colors.CURSE, duration = 5, short = "CloS" })
-AddSpell({ 14183 },{ name = "Premeditation", target = "player", duration = 20, color = colors.CURSE })
+AddSpell({ 14183 },{ name = "Premeditation", target = "player", duration = 10, color = colors.CURSE })
 AddSpell({ 13750 },{ name = "Adrenaline Rush", target = "player", duration = 15, color = colors.LRED })
--- AddSpell({ 63848 },{ name = "Hunger For Blood", short="Hunger", duration = 60, color = colors.ORANGE })
-AddSpell({ 13877 },{ name = "Blade Flurry", target = "player", duration = 15, color = colors.LRED })
--- AddSpell({ 51713 },{ name = "Shadow Dance",duration = 10, color = colors.LRED })
--- AddSpell({ 58427 },{ name = "Overkill", duration = 20, color =  colors.RED })                    
+AddSpell({ 13877 },{ name = "Blade Flurry", target = "player", duration = 15, color = colors.LRED })                 
                 
 AddSpell({ 5171,6774 },{ name = "Slice and Dice", short = "SnD", color = colors.PURPLE, target = "player", duration = function() return ((7 + NugRunning.cpWas * 3) * (1+Talent(14165)*0.25)) end })
-AddSpell({ 31234,31235,31236 },{ name = "Find Weakness", target = "player", duration = 10 })
+AddSpell({ 31234,31235,31236,31237,31238 },{ name = "Find Weakness", target = "player", duration = 10 })
 
 AddSpell({ 11327,11329,26888 },{ name = "Vanish", target = "player", duration = 10 })
 AddSpell({ 45182 },{ name = "Cheating Death", target = "player", duration = 3 })
-AddSpell({ 14143, 14149 },{ name = "Remorseless", target = "player", duration = 20 })
-AddSpell({ 36554 },{ name = "Shadowstep speed", target = "player", duration = 3 })
-AddSpell({ 36563 },{ name = "Shadowstep damage", target = "player", duration = 10 })
+AddSpell({ 14143, 14144, 14149, 14148  },{ name = "Remorseless", target = "player", duration = 20 })
+-- AddSpell({ 36563 },{ name = "SHS damage", Player = true, duration = 10 })
+-- AddSpell({ 36554 },{ name = "SHS speed", target = "player", duration = 3 })
+
 --~ 
 -- DEBUFFS
 AddSpell({ 1833 },{ name = "Cheap Shot",duration = 4, pvpduration = 4, Player = true, color = colors.LRED })
-AddSpell({ 408 },{ name = "Kidney Shot",duration = function() return (1 + NugRunning.cpWas * 1) end, pvpduration = 4, Player = true, color = colors.LRED })
-AddSpell({ 8643 },{ name = "Kidney Shot",duration = function() return (2 + NugRunning.cpWas * 1) end, pvpduration = 5, Player = true, color = colors.LRED })
+AddSpell({ 408 },{ name = "Kidney Shot",duration = function() return (1 + NugRunning.cpWas * 1) end, pvpduration = function() return (1 + NugRunning.cpWas * 1) end, Player = true, color = colors.LRED })
+AddSpell({ 8643 },{ name = "Kidney Shot",duration = function() return (2 + NugRunning.cpWas * 1) end, pvpduration = function() return (2 + NugRunning.cpWas * 1) end, Player = true, color = colors.LRED })
 AddSpell({ 1776, 1777, 8629, 11285, 11286, 38764 },{ name = "Gouge", color = colors.PINK, duration = 4, pvpduration = 4, Player = true, init = function(self)self.duration = 4 + Talent(13741)*0.5 end, init = function(self)self.pvpduration = 4 + Talent(13741)*0.5 end })
 AddSpell({ 2094 },{ name = "Blind",duration = 10, pvpduration = 10, Player = true, color = {0.20, 0.80, 0.2} })
 AddSpell({ 8647, 8649, 8650, 11197, 11198, 26866 },{ name = "Expose Armor", Player = true, color = colors.LBLUE, duration = 30 --[[function() return NugRunning.cpWas * 6 + Glyph(56803)*12 end]] })
--- AddSpell({ 51722 },{ name = "Dismantle",duration = 10,color = colors.LRED })
+
 
 AddSpell({ 6770 },{ name = "Sap",duration = 25, pvpduration = 10, Player = true, color = colors.LBLUE })
 AddSpell({ 2070 },{ name = "Sap",duration = 35, pvpduration = 10, Player = true, color = colors.LBLUE })
@@ -350,11 +387,12 @@ AddSpell({ 11297 },{ name = "Sap",duration = 45, pvpduration = 10, Player = true
 AddSpell({ 51724 },{ name = "Sap",duration = 60, pvpduration = 10, Player = true, color = colors.LBLUE })
 
 AddSpell({ 1943,8639,8640,11273,11274,11275,26867,48671,48672 },{ name = "Rupture", Player = true, color = colors.RED, duration = function() return (8 + NugRunning.cpWas * 2) end})
-AddSpell({ 703,8631,8632,8633,11289,11290,26839,26884,48675,48676,42964 },{ name = "Garrote", Player = true, color = colors.RED, duration = 18 })
+AddSpell({ 703,8631,8632,8633,11289,11290,26839,26884 },{ name = "Garrote", Player = true, color = colors.RED, duration = 18 })
 AddSpell({ 1330 },{ name = "Silence", Player = true, color = colors.PINK, duration = 3 })
 AddSpell({ 18425 },{ name = "Silenced", Player = true, color = colors.PINK, duration = 3 })
 AddSpell({ 16511, 17347, 17348, 26864 },{ name = "Hemorrhage", Player = true, color = colors.RED, duration = 15 })
 AddSpell({ 14278 },{ name = "Ghostly Strike", Player = true, color = colors.PURPLE, duration = 7 })
+AddSpell({ 26679 },{ name = "Deadly Throw", Player = true, color = colors.RED, duration = 6 })
 AddSpell({ 32748 },{ name = "Deadly Throw Interrupt", Player = true, color = colors.PINK, duration = 3 })
 
 AddSpell({ 2818,2819,11353,11354,25349,26968,27187,57969,57970}, { name = "Deadly Poison", color = { 0.1, 0.75, 0.1}, duration = 12, Player = true, short = "Deadly"})
@@ -583,7 +621,7 @@ AddSpell({ 356110 },{ name = "Blood Corruption",duration = 15, color = colors.RE
 AddSpell({ 67, 26017, 26018 },{ name = "Vindication",duration = 15, color = colors.RED})
 
 
-AddCooldown( 20925 ,{ name = "Holy Shield", color = colors.RED })
+--[[AddCooldown( 20925 ,{ name = "Holy Shield", color = colors.RED })
 AddCooldown( 24275 ,{ name = "HoW", color = colors.TEAL })
 AddCooldown( 879 ,{ name = "Exorcism", color = colors.ORANGE })
 AddCooldown( 20271 ,{ name = "Judgement", color = colors.LRED })
@@ -593,7 +631,7 @@ AddCooldown( 35395 ,{ name = "Crusader Strike", color = colors.RED })
 AddCooldown( 53385 ,{ name = "Divine Storm", color = colors.PURPLE })
 
 AddCooldown( 53595 ,{ name = "HotR", color = colors.RED })
-AddCooldown( 53600 ,{ name = "SoR", color = colors.PURPLE })
+AddCooldown( 53600 ,{ name = "SoR", color = colors.PURPLE })]]
 
 
 end
@@ -678,12 +716,12 @@ AddSpell({ 1513 },{ name = "Scare Beast", duration = 10, pvpduration = 10, color
 AddSpell({ 14326 },{ name = "Scare Beast", duration = 15, pvpduration = 10, color = colors.CURSE })
 AddSpell({ 14327 },{ name = "Scare Beast", duration = 20, pvpduration = 10, color = colors.CURSE })
 
-AddCooldown( 53209 ,{ name = "Chimera Shot", color = colors.RED })
+-- AddCooldown( 53209 ,{ name = "Chimera Shot", color = colors.RED })
 AddCooldown( 19434 ,{ name = "Aimed Shot", color = colors.LBLUE })
 --AddCooldown( 2643 ,{ name = "Multi-Shot", color = colors.LBLUE })
 AddCooldown( 3044 ,{ name = "Arcane Shot", color = colors.RED })
-AddCooldown( 53301 ,{ name = "Explosive Shot", color = colors.RED })
-AddCooldown( 3674 ,{ name = "Black Arrow", color = colors.CURSE })
+-- AddCooldown( 53301 ,{ name = "Explosive Shot", color = colors.RED })
+-- AddCooldown( 3674 ,{ name = "Black Arrow", color = colors.CURSE })
 end
 
 if class == "SHAMAN" then
@@ -702,7 +740,7 @@ AddCooldown( 17364 ,{ name = "Stormstrike", color = colors.CURSE, short = "SS" }
 AddCooldown( 8042 ,{ name = "Shock", color = colors.LRED })
 AddCooldown( 8056 ,{ name = "Shock", color = colors.LRED })
 AddCooldown( 8050 ,{ name = "Shock", color = colors.LRED })
-AddCooldown( 60103 ,{ name = "Lava Lash", color = colors.RED })
-AddCooldown( 51505 ,{ name = "Lava Burst", color = colors.RED })
+-- AddCooldown( 60103 ,{ name = "Lava Lash", color = colors.RED })
+-- AddCooldown( 51505 ,{ name = "Lava Burst", color = colors.RED })
 
 end
