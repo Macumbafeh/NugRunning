@@ -113,12 +113,13 @@ function NugRunning.COMBAT_LOG_EVENT_UNFILTERED(self, event, timestamp, eventTyp
 	eventType == "SPELL_DAMAGE" and spellID == 30216 or
 	eventType == "SPELL_DAMAGE" and spellID == 30217 or
 	eventType == "SPELL_DAMAGE" and spellID == 30461 or
-	eventType == "SPELL_DAMAGE" and spellID == 39965 then 
+	eventType == "SPELL_DAMAGE" and spellID == 39965 or 
+	eventType == "SWING_DAMAGE" and isSrcPlayer then 
 		if isSrcPlayer then
             lastCasterGUID[spellID] = srcGUID
         end
     elseif eventType == "SPELL_CAST_SUCCESS" then
-        if spellName == "Berserker" and isSrcPlayer then  -- Replace with the correct spell name
+        if spellName == "Berserker" or spellName == "Berserking" and isSrcPlayer then  -- Replace with the correct spell name
             -- Store the caster's GUID for later use by spell name
             lastCasterGUID[spellName] = srcGUID
         end
@@ -136,14 +137,14 @@ function NugRunning.COMBAT_LOG_EVENT_UNFILTERED(self, event, timestamp, eventTyp
 			end
 		end
     elseif eventType == "SPELL_AURA_APPLIED" then
-        if lastCasterGUID[spellName] and spellName == "Berserker" then
+        if lastCasterGUID[spellName] and spellName == "Berserker" or spellName == "Berserking" then
                 -- Use the stored caster's GUID to activate the timer
                 self:ActivateTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
                 -- Clear the stored GUID after use
                 lastCasterGUID[spellName] = nil  
         end
 		local isDstPlayer = bit.band(dstFlags, COMBATLOG_OBJECT_TYPE_PLAYER) == COMBATLOG_OBJECT_TYPE_PLAYER or bit.band(dstFlags, COMBATLOG_OBJECT_CONTROL_PLAYER) == COMBATLOG_OBJECT_CONTROL_PLAYER
-        if lastCasterGUID[spellID] or spellID == 20549 or spellID == 35474 then
+        if lastCasterGUID[spellID] or spellID == 20549 then
             -- Use the stored caster's GUID to process the aura application
             self:ActivateTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
 			 -- self:ActivateTimer(lastCasterGUID[spellID], dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
@@ -158,10 +159,21 @@ function NugRunning.COMBAT_LOG_EVENT_UNFILTERED(self, event, timestamp, eventTyp
 				-- Reset the lastCasterGUID after use to prevent false associations
             lastCasterGUID[spellID] = nil
         end
-		
-	elseif eventType == "SPELL_AURA_REFRESH" or eventType == "SPELL_AURA_APPLIED_DOSE" then
+		-- Fix for spells which trigger SPELL_AURA_APPLIED only
+		if TrackSpells[spellID] then 
+            if dstGUID == playerGUID then
+                -- Activate the timer for the buff applied to the player
+                self:ActivateTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
+            end
+        end
+	elseif eventType == "SPELL_AURA_REFRESH" then
+				self:RefreshTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, nil, amount)
+                return
+	elseif eventType == "SPELL_AURA_APPLIED_DOSE" then
+			if dstGUID == playerGUID then
                 self:RefreshTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, nil, amount)
                 return
+			end
     elseif eventType == "SPELL_AURA_REMOVED" then
         self:DeactivateTimer(srcGUID, dstGUID, spellID, spellName, opts, auraType)
 		return

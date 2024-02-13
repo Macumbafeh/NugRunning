@@ -165,6 +165,7 @@ if useTrinkets then
     AddSpell({ 33662 },{ name = "Arcane Energy",duration = 15, target = "player" }) -- Vengeance of the Illidari & Ancient Draenei Arcane Relic
     AddSpell({ 33668, 40538, 45049 },{ name = "Tenacity",duration = 15, target = "player" }) -- Regal Protectorate
 	AddSpell({ 44389 },{ name = "Field Repair Bot 110G",duration = 600 }) -- Field Repair Bot 110G
+	AddSpell({ 38332 },{ name = "Blessing of Life",duration = 20, target = "player" }) -- Ribbon of Sacrifice
 	
 	-- (doesn't work no event fire for this)
 	AddSpell({ 28726, 22797 },{ name = "Nightmare Seed",duration = 30, target = "player" }) -- Nightmare Seed 
@@ -212,12 +213,12 @@ if procTrinkets then
     AddSpell({ 64713 },{ name = "FotHeavens", duration = 10 }) --Flame of the Heavens
     -- TBC
     AddSpell({ 34774, 34775 },{ name = "Haste",duration = 10, target = "player" }) -- Dragonspine Trophy
-    AddSpell({ 39446 },{ name = "Aura of Madness",duration = 30, target = "player" }) -- Darkmoon Card: Madness
+    AddSpell({ 39446, 41005, 41002, 40997, 40998, 41404, 41011, 40999, 41009, 39511 },{ name = "Aura of Madness",duration = 60, target = "player" }) -- Darkmoon Card: Madness
     AddSpell({ 33297, 33370, 33953 },{ name = "Spell Haste",duration = 6, target = "player" }) -- Quagmirran's Eye, Scarab of the Infinite Cycle, 
-    AddSpell({ 37705 },{ name = "Healing Discount",duration = 15, target = "player" }) -- Eye of Gruul
+    AddSpell({ 37705, 37722, 37706, 37721, 37723 },{ name = "Healing Discount",duration = 15, target = "player" }) -- Eye of Gruul
     AddSpell({ 45053, 45354 },{ name = "Disdain",duration = 20, target = "player" }) -- Shard of Contempt
     AddSpell({ 42084, 42083 },{ name = "Fury of the Crashing Waves",duration = 10, target = "player" }) -- Tsunami Talisman
-    AddSpell({ 38346, 21894 },{ name = "Meditation",duration = 15, target = "player" }) -- Bangle of Endless Blessings proc
+    AddSpell({ 38346, 38334 },{ name = "Meditation",duration = 15, target = "player" }) -- Bangle of Endless Blessings proc
     AddSpell({ 33649, 33648 },{ name = "Rage of the Unraveller",duration = 10, target = "player" }) -- Hourglass of the Unraveller
     AddSpell({ 34321, 34320 },{ name = "Call of the Nexus",duration = 10, target = "player" }) -- Shiffar's Nexus-Horn
     AddSpell({ 34747, 34749 },{ name = "Recurring Power",duration = 10, target = "player" }) -- Eye of Magtheridon
@@ -235,11 +236,11 @@ if stackingTrinkets then
     AddSpell({ 60486 },{ name = "Dragon Soul",duration = 10 }) --Illustration of the Dragon Soul
     
     --TBC
-    AddSpell({ 39438 },{ name = "Aura of the Crusade",duration = 10, target = "player" }) -- Darkmoon Card: Crusade
+    AddSpell({ 39439, 39441 },{ name = "Aura of the Crusade",duration = 10, target = "player" }) -- Darkmoon Card: Crusade
     AddSpell({ 39443 },{ name = "Aura of Wrath",duration = 10, target = "player" }) -- Darkmoon Card: Wrath
-    AddSpell({ 38332, 38333 },{ name = "Fecundity",duration = 10, target = "player" }) -- Ribbon of Sacrifice
-    AddSpell({ 45062 },{ name = "Holy Energy",duration = 90, target = "player" }) -- Vial of the Sunwell
-    AddSpell({ 45040 },{ name = "Battle Trance",duration = 20, target = "player" }) -- Blackened Naaru Sliver
+    AddSpell({ 38333 },{ name = "Fecundity",duration = 10, target = "player" }) -- Ribbon of Sacrifice
+    AddSpell({ 45062 },{ name = "Holy Energy",duration = 5000, target = "player" }) -- Vial of the Sunwell
+    AddSpell({ 45040, 45041 },{ name = "Battle Trance",duration = 20, target = "player" }) -- Blackened Naaru Sliver
 end
 
 
@@ -309,6 +310,7 @@ end
    
 
 if class == "PRIEST" then
+-- if not UnitGUID("player") then return end
 AddSpell({ 37603 },{ name = "Shadow Word Pain Damage",duration = 15, target = "player", color = colors.LRED }) -- t5 shadow 4pc proc
 
 
@@ -414,8 +416,8 @@ AddSpell({ 37528 },{ name = "Overpower Bonus",duration = 5, target = "player", c
 AddSpell({ 37522 },{ name = "Shield Block Block Value",duration = 6, target = "player", color = colors.LRED }) -- t5 prot 2pc proc
 AddSpell({ 37525 },{ name = "Battle Rush",duration = 10, target = "player", color = colors.LRED }) -- t5 prot 4pc proc
 
-AddSpell({ 6673,5242,6192,11549,11550,11551,25289,2048,47436 },{ name = "Battle Shout", multiTarget = true, shout = true, color = colors.PURPLE, duration = 120,init = function(self)self.duration = (120 + Glyph(58385)*120) * (1+Talent(12321) * 0.25)  end })
-AddSpell({ 469, 47439, 47440 },{ name = "Commanding Shout", multiTarget = true, short = "CommShout", shout = true, color = colors.PURPLE, duration = 120, init = function(self)self.duration = (120 + Glyph(68164)*120) * (1+Talent(12321) * 0.25)  end })
+AddSpell({ 6673,5242,6192,11549,11550,11551,25289,2048,47436 },{ name = "Battle Shout", multiTarget = true, shout = true, color = colors.PURPLE, duration = 120,init = function(self)self.duration = 120 + (1+Talent(12321) * 0.25)  end })
+AddSpell({ 469, 47439, 47440 },{ name = "Commanding Shout", multiTarget = true, short = "CommShout", shout = true, color = colors.PURPLE, duration = 120, init = function(self)self.duration = 120 + (1+Talent(12321) * 0.25)  end })
 AddSpell({ 2565 },{ name = "Shield Block", duration = 10 })
 AddSpell({ 18499 },{ name = "Berserker Rage", duration = 10 })
 AddSpell({ 2687 },{ name = "Bloodrage", duration = 10 })
@@ -660,11 +662,11 @@ AddSpell({ 5570,24974,24975,24976,24977,27013,48468 },{ name = "Insect Swarm",du
 AddSpell({ 339,1062,5195,5196,9852,9853,26989,53308 },{ name = "Entangling Roots",duration = 27 })
 
 AddSpell({ 33786 },{ name = "Cyclone", duration = 6 })
-AddSpell({ 770,16857 },{ name = "Faerie Fire",duration = 300,pvpduration = 40, color = colors.CURSE }) --second is feral
+AddSpell({ 770, 778, 9749, 9907, 26993, 16857, 17390, 17391, 17392, 27011 },{ name = "Faerie Fire",duration = 40,pvpduration = 40, color = colors.CURSE })
 AddSpell({ 99,1735,9490,9747,9898,26998,48559,48560 },{ name = "Demoralizing Roar", short = "DemoRoar", color = {0.3, 0.9, 0.3}, duration = 30, multiTarget = true })
 AddSpell({ 6795 },{ name = "Growl", duration = 3 })
 AddSpell({ 16979 },{ name = "Feral Charge",duration = 4 })
-AddSpell({ 1079,9492,9493,9752,9894,9896,27008,49799,49800 },{ name = "Rip",duration = 12, color = colors.RED, init = function(self)self.duration = 12 + Glyph(54818)*4 end })
+AddSpell({ 1079,9492,9493,9752,9894,9896,27008,49799,49800 },{ name = "Rip",duration = 12, color = colors.RED })
 AddSpell({ 5209 },{ name = "Challenging Roar", duration = 6, multiTarget = true })
 AddSpell({ 5211 },{ name = "Bash",duration = 2, init = function(self)self.duration = 2 + Talent(16940)*0.5 end })
 AddSpell({ 6798 },{ name = "Bash",duration = 3, init = function(self)self.duration = 3 + Talent(16940)*0.5 end })
@@ -696,7 +698,7 @@ AddSpell({ 136,3111,3661,3662,13542,13543,13544,27046,48989,48990,43350 },{ name
 
 AddSpell({ 2974 },{ name = "Wing Clip", duration = 10, color = { 192/255, 77/255, 48/255} })
 AddSpell({ 19306,20909,20910,27067,48998,48999 },{ name = "Counterattack", duration = 5, color = { 192/255, 77/255, 48/255} })
-AddSpell({ 13797,14298,14299,14300,14301,27024,49053,49054 },{ name = "Immolation Trap", duration = 15, color = colors.ORANGE, init = function(self)self.duration = 15 - Glyph(56846)*6 end })
+AddSpell({ 13797,14298,14299,14300,14301,27024,49053,49054 },{ name = "Immolation Trap", duration = 15, color = colors.ORANGE })
 AddSpell({ 1978,13549,13550,13551,13552,13553,13554,13555,25295,27016,49000,49001 },{ name = "Serpent Sting", duration = 15, color = colors.PURPLE })
 AddSpell({ 3034 },{ name = "Viper Sting", duration = 8, color = colors.LBLUE })
 AddSpell({ 19503 },{ name = "Scatter Shot", duration = 4, color = colors.CHILL })
