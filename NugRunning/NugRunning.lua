@@ -85,8 +85,154 @@ function NugRunning.ADDON_LOADED(self,event,arg1)
 end
 
 local lastCasterGUID = {}
+local bit_band = bit.band
+local COMBATLOG_OBJECT_AFFILIATION_MINE = COMBATLOG_OBJECT_AFFILIATION_MINE
+local COMBATLOG_OBJECT_TYPE_PLAYER = COMBATLOG_OBJECT_TYPE_PLAYER
+local COMBATLOG_OBJECT_REACTION_HOSTILE = COMBATLOG_OBJECT_REACTION_HOSTILE
+local COMBATLOG_OBJECT_CONTROL_PLAYER = COMBATLOG_OBJECT_CONTROL_PLAYER
+local COMBATLOG_OBJECT_REACTION_FRIENDLY = COMBATLOG_OBJECT_REACTION_FRIENDLY
+local playerGUID = UnitGUID("player")
 
 function NugRunning.COMBAT_LOG_EVENT_UNFILTERED(self, event, timestamp, eventType, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, spellID, spellName, spellSchool, auraType, amount)
+    
+	
+	if TrackSpells[spellID] then
+	
+    local isSrcPlayer = (bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE)
+	local isDstPlayer = bit_band(dstFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE
+	
+	local isPlayer = bit_band(srcFlags, COMBATLOG_OBJECT_TYPE_PLAYER) == COMBATLOG_OBJECT_TYPE_PLAYER or bit.band(srcFlags, COMBATLOG_OBJECT_CONTROL_PLAYER) == COMBATLOG_OBJECT_CONTROL_PLAYER
+    local isEnemy = bit_band(srcFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE
+    local isSrcFriendly = bit_band(srcFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) == COMBATLOG_OBJECT_REACTION_FRIENDLY
+	local isInParty = bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_PARTY) == COMBATLOG_OBJECT_AFFILIATION_PARTY  or bit.band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_RAID) == COMBATLOG_OBJECT_AFFILIATION_RAID
+	local isOutsider = bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_OUTSIDER) == COMBATLOG_OBJECT_AFFILIATION_OUTSIDER
+    local isDstEnemy = bit_band(dstFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE
+    local opts = TrackSpells[spellID]
+    if not opts then return end
+	
+	if isSrcFriendly and isInParty or isOutsider then return end
+	
+	if not isSrcPlayer and opts.anySource then
+               -- srcGUID = UnitGUID("player")
+                isSrcPlayer = true
+        end
+        if opts.target and dstGUID ~= UnitGUID(opts.target) then return end
+		
+	-- Fix for Vampiric Touch which doesn't fire SPELL_CAST_SUCCESS event
+	if eventType == "SPELL_CAST_START" and spellID == 34916 or 
+	eventType == "SPELL_CAST_START" and spellID == 34917 or
+	eventType == "SPELL_CAST_START" and spellID == 34914 or
+	eventType == "SPELL_CAST_START" and spellID == 10955 then
+        if isSrcPlayer and not isEnemy and isDstEnemy then
+			if isSrcFriendly and isInParty then return end
+            lastCasterGUID[spellID] = srcGUID
+        end
+		-- Fix for Bombs/Grenades/Poisons
+	elseif eventType == "SPELL_DAMAGE" or eventType == "SWING_DAMAGE" then 
+	if spellID == 4067 or 
+		spellID == 4068 or 
+		spellID == 4069 or
+		spellID == 12543 or
+		spellID == 12562 or
+		spellID == 19769 or
+		spellID == 19784 or
+		spellID == 19821 or
+		spellID == 30216 or
+		spellID == 30217 or
+		spellID == 30461 or
+		spellID == 39965 or 
+		spellID == 2818 or
+		spellID == 2819 or -- Bombs/Grenades
+       spellID == 11353 or
+       spellID == 11354 or
+       spellID == 25349 or
+       spellID == 26968 or
+       spellID == 27187 or 
+       spellID == 57969 or
+       spellID == 57970 or -- Deadly poison
+       spellID == 3409 or
+       spellID == 11201 or -- Crippling
+       spellID == 5760 or
+       spellID == 8692 or
+       spellID == 11398 or -- Mind-numbing
+       spellID == 13218 or
+       spellID == 13222 or
+       spellID == 13223 or
+       spellID == 13224 or
+       spellID == 27189 then -- Wound poison
+		if isSrcPlayer and not isEnemy and isDstEnemy then
+            lastCasterGUID[spellID] = srcGUID
+        end
+	end
+	 
+    elseif eventType == "SPELL_CAST_SUCCESS"  then
+         -- if opts.anySource or isSrcPlayer then
+		 if isSrcPlayer and not isEnemy and isDstEnemy then
+            -- Store the caster's GUID for later use
+            lastCasterGUID[spellID] = srcGUID
+		end
+		 -- Small fix for Garrote which has 2 debuffs
+		if spellID == 26884 and isSrcPlayer or 
+			spellID == 703 and isSrcPlayer or 
+			spellID == 8631 and isSrcPlayer or 
+			spellID == 8632 and isSrcPlayer or 
+			spellID == 8633 and isSrcPlayer or 
+			spellID == 11289 and isSrcPlayer or 
+			spellID == 11290 and isSrcPlayer or 
+			spellID == 26839 and isSrcPlayer then  
+             local silenceOpts = TrackSpells[1330]
+                if silenceOpts then
+                    self:ActivateTimer(lastCasterGUID[spellID], dstGUID, dstName, dstFlags, 1330, "Silence", silenceOpts, auraType)
+					return
+                end
+        end
+		
+		-- Fix for Shadowfiend and Repair Bot 110G which doesn't fire SPELL_AURA_APPLIED event
+		if isSrcPlayer and spellID == 34433 or isSrcPlayer and spellID == 44389 then 
+			lastCasterGUID[spellID] = srcGUID
+			if lastCasterGUID[spellID] then
+				self:ActivateTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
+				lastCasterGUID[spellID] = nil
+				return
+			end
+		end
+    elseif eventType == "SPELL_AURA_APPLIED" then
+        
+		if (auraType == "BUFF" and isDstPlayer) then
+            self:ActivateTimer(nil, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
+			return
+		elseif (auraType == "DEBUFF" and lastCasterGUID[spellID]) then
+            self:ActivateTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
+            -- Reset the lastCasterGUID after use to prevent false associations
+			lastCasterGUID[spellID] = nil
+			return
+		end		
+		
+	elseif eventType == "SPELL_AURA_REFRESH" then
+				self:RefreshTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, nil, amount)
+                return
+	elseif eventType == "SPELL_AURA_APPLIED_DOSE" then
+		if (auraType == "BUFF" and isDstPlayer) then
+			self:RefreshTimer(nil, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, nil, amount)
+			return
+		elseif (auraType == "DEBUFF" and lastCasterGUID[spellID]) then
+			self:RefreshTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType, nil, amount)
+			lastCasterGUID[spellID] = nil
+			return
+		end		
+                
+    elseif eventType == "SPELL_AURA_REMOVED" then
+        self:DeactivateTimer(srcGUID, dstGUID, spellID, spellName, opts, auraType)
+		return
+    elseif eventType == "SPELL_AURA_REMOVED_DOSE" then
+        self:RemoveDose(nil, dstGUID, spellID, spellName, amount)
+		return
+    end
+end
+
+
+
+--[[ function NugRunning.COMBAT_LOG_EVENT_UNFILTERED(self, event, timestamp, eventType, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, spellID, spellName, spellSchool, auraType, amount)
     if TrackSpells[spellID] then
 	local playerGUID = UnitGUID("player")
     local isSrcPlayer = (bit.band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE)
@@ -183,7 +329,7 @@ function NugRunning.COMBAT_LOG_EVENT_UNFILTERED(self, event, timestamp, eventTyp
     end
 end
 
-
+]]
   --[[ Track everything
 
 function NugRunning.COMBAT_LOG_EVENT_UNFILTERED( self, event, timestamp, eventType, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, spellID, spellName, spellSchool, auraType, amount)
