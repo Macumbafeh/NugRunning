@@ -100,7 +100,7 @@ if useTrinkets then
     AddSpell({ 44041, 44043, 44044, 44045, 44046, 44047 },{ name = "Chastise", duration = 2 }) --Priest Dwarf/Draenei spell
     AddSpell({ 28730, 25046 },{ name = "Arcane Torrent", duration = 2, multiTarget = true }) --Blood elf Racial
     AddSpell({ 2651 },{ name = "Elune's Grace", duration = 15 }) --Priest Night elf spell
-	AddSpell({ 20600 },{ name = "Perception", duration = 15 }) --Human Racial
+	AddSpell({ 20600 },{ name = "Perception", duration = 20 }) --Human Racial
    
     -- Bombs/Grenades
     AddSpell({ 4067 },{ name = "Big Bronze Bomb", duration = 2, multiTarget = true })
@@ -253,13 +253,14 @@ AddSpell({ 39437 },{ name = "Shadowflame Hellfire and RoF",duration = 15, target
 
 
 -- BUFFS
-AddSpell({ 63321 },{ name = "Life Tap",duration = 20, target = "player", color = colors.PURPLE })
 AddSpell({ 34936 },{ name = "Backlash",duration = 8, target = "player" })
 --~ AddSpell({ 54274,54276,54277 },{ name = "Backdraft",duration = 15 })
 AddSpell({ 17941 },{ name = "Nightfall",duration = 10, target = "player", color = colors.CURSE })
 AddSpell({ 30300 },{ name = "Nether Protection",duration = 4, target = "player", color = colors.LRED })
 -- AddSpell({ 47383,71162,71165 },{ name = "Molten Core",duration = 18, color = colors.PURPLE })
 AddSpell({ 6229, 11739, 11740, 28610 },{ name = "Shadow Ward",duration = 30, target = "player", color = colors.PURPLE })
+AddSpell({ 18708 },{ name = "Fel domination",duration = 15, target = "player", color = colors.PINK })
+AddSpell({ 18288 },{ name = "Amplify Curse",duration = 30, target = "player", color = colors.CURSE })
 -- AddSpell({ 64371 },{ name = "Eradication",duration = 10, color = colors.CURSE })
 
 -- DEBUFFS
@@ -280,16 +281,17 @@ AddSpell({ 704, 7658, 7659, 11717, 27226 },{ name = "Curse of Recklessness",dura
 AddSpell({ 1714,11719 },{ name = "Curse of Tongues",duration = 30, color = colors.CURSE, pvpduration = 12, Player = true, short = "CoT" })
 AddSpell({ 702,1108,6205,7646,11707,11708,27224,30909 },{ name = "Curse of Weakness",duration = 120, Player = true, color = colors.CURSE, short = "Weakness" })
 AddSpell({ 18223 },{ name = "Curse of Exhaustion",duration = 12, color = colors.CURSE, Player = true, short = "CoEx" })
-
+-- AddSpell({ 17793, 17794, 17797, 17801, 17798, 17796, 17799, 17802, 17800, 17803 },{ name = "Shadow Vulnerability",duration = 12, Player = true, short = "Vulnerability" })
+-- AddSpell({ 18118 },{ name = "Aftermath",duration = 12, Player = true })
 -- AddSpell({ 48181,59161,59163,59164 },{ name = "",duration = 12, recast_mark = 3, color = colors.TEAL }) --Haunt
 AddSpell({ 1490,11721,11722,27228 --[[,47865]] },{ name = "Curse of Elements", duration = 300, Player = true, color = colors.CURSE, pvpduration = 120, short = "CoE" })
 AddSpell({ 30283,30413,30414,47846,47847 },{ name = "Shadowfury",duration = 2, Player = true, multiTarget = true }) -- 3 sec duration on wotlk
 -- AddSpell({ 47960,61291 },{ name = "Shadowflame",duration = 8, multiTarget = true })
 --PET SPELLS
-AddSpell({ 24259 },{ name = "Spell Lock",duration = 3, color = colors.PINK })
+AddSpell({ 19647, 19244, 19650, 20433, 20434, 24259 },{ name = "Spell Lock",duration = 3, color = colors.PINK })
 AddSpell({ 6358 },{ name = "Seduction",duration = 15, pvpduration = 10 })
 AddSpell({ 17767,17850,17851,17852,17853,17854,27272,47987,47988 },{ name = "Consume Shadows", duration = 6, color = colors.PURPLE, short = "Consume" })
-AddSpell({ 30153,30195,30197,47995 },{ name = "Intercept",duration = 3 })
+AddSpell({ 30153,30195,30197, 18093, 47995 },{ name = "Intercept",duration = 3 })
 AddSpell({ 7812,19438,19440,19441,19442,19443,27273,47985,47986 },{ name = "Sacrifice",duration = 30, color = colors.PURPLE })
 --
 AddSpell({ 5782 },{ name = "Fear", duration = 10, Player = true, pvpduration = 10 })
@@ -321,16 +323,17 @@ AddSpell({ 17,592,600,3747,6065,6066,10898,10899,10900,10901,25217,25218,48065,4
 AddSpell({ 41635,48110,48111 },{ name = "Prayer of Mending",duration = 30, color = colors.RED, textfunc = function(spellName, dstName) return dstName end })
 AddSpell({ 33151 },{ name = "Surge of Light",duration = 10 })
 AddSpell({ 63725,63724,34754 },{ name = "Holy Concentration",duration = 8 })
-AddSpell({ 47788 },{ name = "Guardian Spirit",duration = 10, color = colors.LBLUE, short = "Guardian" })
+-- AddSpell({ 47788 },{ name = "Guardian Spirit",duration = 10, color = colors.LBLUE, short = "Guardian" })
 AddSpell({ 33206 },{ name = "Pain Suppression",duration = 8, color = colors.LBLUE })
 AddSpell({ 6346 },{ name = "Fear Ward",duration = 180, color = colors.LBLUE })
 AddSpell({ 586, 9578, 9579, 9592, 10941, 10942, 25429 },{ name = "Fade",duration = 10 })
 -- AddSpell({ 49694,59000 },{ name = "Improved Spirit Tap",duration = 8 })
 AddSpell({ 15271 },{ name = "Spirit Tap",duration = 15 })
-AddSpell({ 47585 },{ name = "Dispersion",duration = 6, color = colors.PURPLE })
+-- AddSpell({ 47585 },{ name = "Dispersion",duration = 6, color = colors.PURPLE })
 AddSpell({ 9035, 19281, 19282, 19283, 19284, 19285, 25470 },{ name = "Hex of Weakness",duration = 120, color = colors.PURPLE }) -- Troll 
 --~ AddSpell({ 47753 },{ name = "Divine Aegis", duration = 12 })
 AddSpell({ 59891,59890,59889,59888,59887 },{ name = "Borrowed Time", duration = 6 })
+
 -- DEBUFFS
 AddSpell({ 453, 8192, 10953, 25596 },{ name = "Mind Soothe",duration = 15 })
 AddSpell({ 15269 },{ name = "Blackout",duration = 3, color = colors.LRED })
@@ -418,7 +421,7 @@ AddSpell({ 37525 },{ name = "Battle Rush",duration = 10, target = "player", colo
 
 AddSpell({ 6673,5242,6192,11549,11550,11551,25289,2048,47436 },{ name = "Battle Shout", multiTarget = true, shout = true, color = colors.PURPLE, duration = 120,init = function(self)self.duration = 120 + (1+Talent(12321) * 0.25)  end })
 AddSpell({ 469, 47439, 47440 },{ name = "Commanding Shout", multiTarget = true, short = "CommShout", shout = true, color = colors.PURPLE, duration = 120, init = function(self)self.duration = 120 + (1+Talent(12321) * 0.25)  end })
-AddSpell({ 2565 },{ name = "Shield Block", duration = 10 })
+AddSpell({ 2565 },{ name = "Shield Block", duration = 5, init = function(self)self.duration = 5 + (1+Talent(12321) * 0)  end })
 AddSpell({ 18499 },{ name = "Berserker Rage", duration = 10 })
 AddSpell({ 2687 },{ name = "Bloodrage", duration = 10 })
 AddSpell({ 12880, 14201, 14202, 14203, 14204 },{ name = "Enrage", duration = 12 })
@@ -428,8 +431,8 @@ AddSpell({ 12292 },{ name = "Death Wish", duration = 30, color = { 0.2, 0.5, 0.7
 AddSpell({ 12328 },{ name = "Sweeping Strikes", duration = 10, color = { 0.2, 0.5, 0.7 } })
 AddSpell({ 30029, 30031, 30032 },{ name = "Rampage", duration = 30, color = { 0.2, 0.5, 0.7 } })
 AddSpell({ 20230 },{ name = "Retaliation", duration = 15 })
-AddSpell({ 50227 },{ name = "Slam!", color = colors.LRED, duration = 5 })
-AddSpell({ 7922 },{ name = "Charge", color = colors.LRED, duration = 1 })
+-- AddSpell({ 50227 },{ name = "Slam!", color = colors.LRED, duration = 5 })
+AddSpell({ 7922, 11578 },{ name = "Charge", color = colors.LRED, duration = 1 })
 AddSpell({ 20253, 20614, 20615, 25273, 25274 },{ name = "Intercept", color = colors.LRED, duration = 3 })
 AddSpell({ 3411 },{ name = "Intervene", color = colors.YELLOW, duration = 10 })
 AddSpell({ 1715, 7372, 7373, 25212 },{ name = "Hamstring", color = { 192/255, 77/255, 48/255}, duration = 15, pvpduration = 10 })
@@ -439,7 +442,7 @@ AddSpell({ 6546 },{ name = "Rend", color = colors.RED, duration = 12})
 AddSpell({ 6547 },{ name = "Rend", color = colors.RED, duration = 15})
 AddSpell({ 6548 },{ name = "Rend", color = colors.RED, duration = 18})
 AddSpell({ 11572,11573,11574,25208 },{ name = "Rend", color = colors.RED, duration = 21})
-AddSpell({ 46968 },{ name = "Shockwave", color = { 0.6, 0, 1 }, duration = 4, multiTarget = true })
+-- AddSpell({ 46968 },{ name = "Shockwave", color = { 0.6, 0, 1 }, duration = 4, multiTarget = true })
 AddSpell({ 12809 },{ name = "Concussion Blow", color = { 1, 0.3, 0.6 }, duration = 5 })
 AddSpell({ 23694 },{ name = "Immobilized", color = { 1, 0.3, 0.6 }, duration = 5 }) -- Improved Hamstring
 AddSpell({ 12798 },{ name = "Stun", color = { 1, 0.3, 0.6 }, duration = 3 }) -- Revenge Stun
@@ -450,10 +453,10 @@ AddSpell({ 355 },{ name = "Taunt", duration = 3 })
 AddSpell({ 1161 },{ name = "Challenging Shout", duration = 6 })
 AddSpell({ 676 },{ name = "Disarm", duration = 10 })
 AddSpell({ 871 },{ name = "Shield Wall", duration = 10 })
-AddSpell({ 12975 },{ name = "Last Stand", duration = 20 })
+AddSpell({ 12975, 12976 },{ name = "Last Stand", duration = 20 })
 AddSpell({ 23920 },{ name = "Spell Reflection", color = { 0.2, 0.5, 0.7 }, duration = 5 })
 AddSpell({ 7386, 7405, 8380, 11596, 11597,25225 },{ name = "Sunder Armor", short = "Sunder", anySource = true, color = { 1, 0.2, 0.2}, duration = 30 })
-AddSpell({ 1160,6190,11554,11555,11556,25202,25203,47437 },{ name = "Demoralizing Shout", anySource = true, short = "DemoShout", color = {0.3, 0.9, 0.3}, duration = 30, multiTarget = true })
+AddSpell({ 1160,6190,11554,11555,11556,25202,25203,47437 },{ name = "Demoralizing Shout", anySource = true, short = "DemoShout", color = {0.3, 0.9, 0.3}, duration = 30, multiTarget = true, init = function(self)self.duration = 30 + (1+Talent(12321) * 0.25)  end })
 AddSpell({ 6343 },{ name = "Thunder Clap", anySource = true, color = {149/255, 121/255, 214/255}, duration = 10, multiTarget = true })
 AddSpell({ 8198 },{ name = "Thunder Clap", anySource = true, color = {149/255, 121/255, 214/255}, duration = 14, multiTarget = true })
 AddSpell({ 8204 },{ name = "Thunder Clap", anySource = true, color = {149/255, 121/255, 214/255}, duration = 18, multiTarget = true })
@@ -461,19 +464,16 @@ AddSpell({ 8205 },{ name = "Thunder Clap", anySource = true, color = {149/255, 1
 AddSpell({ 11580},{ name = "Thunder Clap", anySource = true, color = {149/255, 121/255, 214/255}, duration = 26, multiTarget = true })
 AddSpell({ 11581, 25264 },{ name = "Thunder Clap", anySource = true, color = {149/255, 121/255, 214/255}, duration = 30, multiTarget = true })
 --~ AddSpell({ 56112 },{ name = "Furious Attacks", duration = 10 })
-AddSpell({ 52437 },{ name = "Sudden Death", color = colors.LRED, duration = 10 })
+-- AddSpell({ 52437 },{ name = "Sudden Death", color = colors.LRED, duration = 10 })
 AddSpell({ 5246, 20511 },{ name = "Intimidating Shout", color = colors.LRED, duration = 8 })
-AddSpell({ 60503 },{ name = "", recast_mark = 3, color = colors.RED, duration = 6 }) -- Overpower proc (Taste for Blood)
+-- AddSpell({ 60503 },{ name = "", recast_mark = 3, color = colors.RED, duration = 6 }) -- Overpower proc (Taste for Blood)
 AddSpell({ 7384, 7887, 11584,11585 },{ name = "Overpower", recast_mark = 3, color = colors.RED, duration = 5 }) -- Overpower proc
 AddSpell({ 5308, 20658, 20660, 20661, 20662, 25234, 25236 },{ name = "Execute", recast_mark = 3, color = colors.RED, duration = 900 }) -- Execute proc
 AddSpell({ 6572, 6574, 7379, 11600, 11601, 25288, 25269, 30357 },{ name = "Revenge", recast_mark = 3, color = colors.RED, duration = 5 }) -- Revenge proc
 AddSpell({ 34428 },{ name = "Victory Rush", duration = 20 }) 
 AddSpell({ 12294, 21551, 21552, 21553, 25248, 30330 },{ name = "Mortal Strike", duration = 10 }) 
 
-AddCooldown( 12294, 21551, 21552, 21553, 25248, 30330, { name = "Mortal Strike",  color = colors.LBLUE })
-AddCooldown( 23881, { name = "Bloodthirst",  color = colors.LBLUE })
-AddCooldown( 23922, { name = "Shield Slam",  color = colors.LBLUE, resetable = true })
-AddCooldown( 1680, { name = "Whirlwind" })
+
 --~ AddCooldown( 6572, { name = "Revenge" })
 end
 
@@ -509,42 +509,43 @@ AddSpell({ 47000, 46989 },{ name = "Improved Blink",duration = 4 })
 AddSpell({ 130 },{ name = "Slow Fall",duration = 30 })
 AddSpell({ 31643 },{ name = "Blazing Speed",duration = 8 })
 AddSpell({ 12042 },{ name = "Arcane Power",duration = 15, short = "APwr" })
-AddSpell({ 44401 },{ name = "Missile Barrage",duration = 15, color = colors.LRED, short = "Missiles!" })
-AddSpell({ 48108 },{ name = "Hot Streak",duration = 10, color = colors.LRED, short = "Pyro!" })
-AddSpell({ 57761 },{ name = "Brain Freeze",duration = 15, color = colors.LRED, short = "Fireball!" })
+-- AddSpell({ 44401 },{ name = "Missile Barrage",duration = 15, color = colors.LRED, short = "Missiles!" })
+-- AddSpell({ 48108 },{ name = "Hot Streak",duration = 10, color = colors.LRED, short = "Pyro!" })
+-- AddSpell({ 57761 },{ name = "Brain Freeze",duration = 15, color = colors.LRED, short = "Fireball!" })
 AddSpell({ 543,8457,8458,10223,10225,27128 },{ name = "Fire Ward",duration = 30, color = colors.LRED })
 AddSpell({ 6143,8461,8462,10177,28609,32796 },{ name = "Frost Ward",duration = 30, color = colors.LRED })
 AddSpell({ 11426,13031,13032,13033,27134,33405,43038,43039,45740 },{ name = "Ice Barrier",duration = 60, color = colors.LGREEN })
 AddSpell({ 1463,8494,8495,10191,10192,10193,27131 },{ name = "Mana Shield",duration = 60, color = colors.LGREEN })
-AddSpell({ 1008,8455,10169,10170,27130,33946 },{ name = "Amplify Magic",duration = 600, color = colors.TEAL })
-AddSpell({ 604,8450,8451,10173,10174,33944 },{ name = "Dampen Magic",duration = 600, color = colors.TEAL })
+-- AddSpell({ 1008,8455,10169,10170,27130,33946 },{ name = "Amplify Magic",duration = 600, color = colors.TEAL })
+-- AddSpell({ 604,8450,8451,10173,10174,33944 },{ name = "Dampen Magic",duration = 600, color = colors.TEAL })
 
-AddSpell({ 23028,27127 },{ name = "Arcane Brilliance",duration = 3600, color = colors.TEAL })
-AddSpell({ 1459,1460,1461,10156,10157,27126 },{ name = "Arcane Intellect",duration = 1800, color = colors.TEAL })
-AddSpell({ 168,7300,7301 },{ name = "Frost Armor",duration = 1800, color = colors.TEAL })
-AddSpell({ 7302, 7320,10219,10220,27124 },{ name = "Ice Armor",duration = 1800, color = colors.TEAL })
-AddSpell({ 6117, 22782,22783,27125 },{ name = "Mage Armor",duration = 1800, color = colors.TEAL })
-AddSpell({ 30482 },{ name = "Molten Armor",duration = 1800, color = colors.TEAL })
+-- AddSpell({ 23028,27127 },{ name = "Arcane Brilliance",duration = 3600, color = colors.TEAL })
+-- AddSpell({ 1459,1460,1461,10156,10157,27126 },{ name = "Arcane Intellect",duration = 1800, color = colors.TEAL })
+-- AddSpell({ 168,7300,7301 },{ name = "Frost Armor",duration = 1800, color = colors.TEAL })
+-- AddSpell({ 7302, 7320,10219,10220,27124 },{ name = "Ice Armor",duration = 1800, color = colors.TEAL })
+-- AddSpell({ 6117, 22782,22783,27125 },{ name = "Mage Armor",duration = 1800, color = colors.TEAL })
+-- AddSpell({ 30482 },{ name = "Molten Armor",duration = 1800, color = colors.TEAL })
 AddSpell({ 66 },{ name = "Fading",duration = 6 })
 AddSpell({ 32612 },{ name = "Invisibility",duration = 20 })
-AddSpell({ 36032 },{ name = "Arcane Blast",duration = 8, color = colors.RED })
+AddSpell({ 36032, 30451 },{ name = "Arcane Blast",duration = 8, color = colors.RED })
 --~ AddSpell({ 55342 },{ name = "Mirror Image",duration = 30 })
 AddSpell({ 45438 },{ name = "Ice Block",duration = 10 })
 AddSpell({ 31687 },{ name = "Water Elemental",duration = 45 })
 AddSpell({ 12536 },{ name = "Clearcast",duration = 15, color = colors.PURPLE })
+AddSpell({ 12051 },{ name = "Evocation",duration = 8, color = colors.LBLUE })
 --~ AddSpell({ 54741 },{ name = "Firestarter",duration = 10 })
 -- DEBUFFS
 AddSpell({ 22959 },{ name = "Improved Scorch",duration = 30, recast_mark = 2.5, color = colors.RED, short = "Scorch" })
 AddSpell({ 12654 },{ name = "Ignite",duration = 4, color = colors.RED })
-AddSpell({ 44457,55359,55360 },{ name = "Living Bomb",duration = 12, color = colors.ORANGE, short = "Bomb" })
+-- AddSpell({ 44457,55359,55360 },{ name = "Living Bomb",duration = 12, color = colors.ORANGE, short = "Bomb" })
 AddSpell({ 31589 },{ name = "Slow", duration = 15, pvpduration = 10 })
 AddSpell({ 122,865,6131,10230,27088,42917 },{ name = "Frost Nova",duration = 8, short = "FrNova", color = colors.FROZEN, multiTarget = true })
 AddSpell({ 12494 },{ name = "Frostbite",duration = 5, color = colors.FROZEN })
 AddSpell({ 33395 },{ name = "Freeze",duration = 8, color = colors.FROZEN })
 --~ AddSpell({ 12579 },{ name = "Winter's Chill",duration = 15, short = "WChill", maxtimers = 0 }) -- ignored if applied on nontargeted units
-AddSpell({ 44544 },{ name = "Fingers of Frost",duration = 15, color = colors.FROZEN, short = "FoF" })
-AddSpell({ 55080 },{ name = "Shattered Barrier",duration = 8, color = colors.FROZEN, short = "Shattered" })
-AddSpell({ 44572 },{ name = "Deep Freeze",duration = 5 })
+-- AddSpell({ 44544 },{ name = "Fingers of Frost",duration = 15, color = colors.FROZEN, short = "FoF" })
+-- AddSpell({ 55080 },{ name = "Shattered Barrier",duration = 8, color = colors.FROZEN, short = "Shattered" })
+-- AddSpell({ 44572 },{ name = "Deep Freeze",duration = 5 })
 AddSpell({ 18469 },{ name = "Silenced",duration = 2, color = colors.PINK }) -- imp CS
 AddSpell({ 55021 },{ name = "Silenced",duration = 4, color = colors.PINK }) -- imp CS
 ---
@@ -553,6 +554,12 @@ AddSpell({ 12824 },{ name = "Polymorph", duration = 30, color = colors.LGREEN, p
 AddSpell({ 12825 },{ name = "Polymorph", duration = 40, color = colors.LGREEN, pvpduration = 10, short = "Poly" })
 AddSpell({ 61305,28272,61721,12826,61025,61780,28271 },{ name = "Polymorph", duration = 50, color = colors.LGREEN, pvpduration = 10, short = "Poly" })
 AddSpell({ 12355 },{ name = "Impact", duration = 2, color = colors.LGREEN })
+AddSpell({ 116 },{ name = "Frostbolt", duration = 5, color = colors.CHILL, init = function(self)self.duration = 5 + (1+Talent(12569) * 1)  end })
+AddSpell({ 205, 837 },{ name = "Frostbolt", duration = 6, color = colors.CHILL, init = function(self)self.duration = 5 + (1+Talent(12569) * 1)  end })
+AddSpell({ 7322, 8406 },{ name = "Frostbolt", duration = 7, color = colors.CHILL, init = function(self)self.duration = 5 + (1+Talent(12569) * 1)  end })
+AddSpell({ 8407, 8408 },{ name = "Frostbolt", duration = 8, color = colors.CHILL, init = function(self)self.duration = 5 + (1+Talent(12569) * 1)  end })
+AddSpell({ 10179, 10180, 10181, 25304, 27071, 27072 },{ name = "Frostbolt", duration = 9, color = colors.CHILL, init = function(self)self.duration = 5 + (1+Talent(12569) * 1)  end })
+-- AddSpell({ 43987 },{ name = "Ritual of Refreshment", duration = 180, color = colors.LGREEN })
 --AOE
 AddSpell({ 120,8492,10159,10160,10161,27087,42930,42931 },{ name = "Cone of Cold", duration = 8, color = colors.CHILL, short = "CoC", multiTarget = true })
 AddSpell({ 2120,2121,8422,8423,10215,10216,27086,42925,42926 },{ name = "Flamestrike", duration = 8, multiTarget = true })
