@@ -84,6 +84,8 @@ function NugRunning.ADDON_LOADED(self,event,arg1)
     end
 end
 
+
+
 local lastCasterGUID = {}
 local bit_band = bit.band
 local COMBATLOG_OBJECT_AFFILIATION_MINE = COMBATLOG_OBJECT_AFFILIATION_MINE
@@ -137,6 +139,12 @@ function NugRunning.COMBAT_LOG_EVENT_UNFILTERED(self, event, timestamp, eventTyp
 			if (isDstFriendly and (isInParty or isOutsider)) or not isSrcPlayer then return end
             lastCasterGUID[spellID] = srcGUID
        end
+	elseif eventType == "SPELL_CAST_FAILED" then 
+		if UnitExists("pet") then return end
+		if not UnitExists("pet") then
+			self:DeactivateTimer(srcGUID, dstGUID, spellID, spellName, opts, auraType)
+			return
+		end
 	elseif eventType == "SPELL_ENERGIZE" then 
 		if isSrcPlayer then
 			if (isSrcFriendly and (isInParty or isOutsider)) or (isEnemy and isPlayer) then return end
@@ -184,12 +192,15 @@ function NugRunning.COMBAT_LOG_EVENT_UNFILTERED(self, event, timestamp, eventTyp
         end
 	end
 	
+	
 	elseif eventType == "SPELL_DAMAGE" then
 		if isSrcPlayer then
 			if (isSrcFriendly and (isInParty or isOutsider)) or (isEnemy and isPlayer) then return end
 			if (isDstFriendly and (isInParty or isOutsider)) or not isSrcPlayer then return end
             lastCasterGUID[spellID] = srcGUID
         end
+	 
+		
 	 
     elseif eventType == "SPELL_CAST_SUCCESS"  then
          -- if opts.anySource or isSrcPlayer then
@@ -243,19 +254,39 @@ function NugRunning.COMBAT_LOG_EVENT_UNFILTERED(self, event, timestamp, eventTyp
 					return
             end
 		end
-		-- Fix for Shadowfiend and Repair Bot 110G which doesn't fire SPELL_AURA_APPLIED event
-		if isSrcPlayer and spellID == 34433 or isSrcPlayer and spellID == 44389 or isSrcPlayer and spellID == 31687 then 
+		-- Fix for Repair Bot 110G which doesn't fire SPELL_AURA_APPLIED event
+		if isSrcPlayer and spellID == 44389 then 
 			lastCasterGUID[spellID] = srcGUID
 			if lastCasterGUID[spellID] then
 				self:ActivateTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, auraType)
 				lastCasterGUID[spellID] = nil
 				return
 			end
-			-- if not UnitExists("pet") then
-			--	self:DeactivateTimer(srcGUID, dstGUID, 24259, "Silence", silencePet, auraType)
-			--	return
---			end
+			
 		end
+		
+		-- Shadowfiend
+		if isSrcPlayer and spellID == 34433 then
+			if not UnitExists("pet") then
+				local ShadowfiendOpts = TrackSpells[34433]
+				if ShadowfiendOpts then
+					self:ActivateTimer(srcGUID, dstGUID, dstName, dstFlags, 34433, "Shadowfiend", ShadowfiendOpts, auraType)	
+					return
+				end
+			end
+		end
+		
+		-- Water elem
+		if isSrcPlayer and spellID == 31687 then
+			if not UnitExists("pet") then
+				local WaterElemOpts = TrackSpells[31687]
+				if WaterElemOpts then
+					self:ActivateTimer(srcGUID, dstGUID, dstName, dstFlags, 31687, "Water Elemental", WaterElemOpts, auraType)	
+					return
+				end
+			end
+		end
+		
 	elseif eventType == "SPELL_MISSED" then
 		if spellID == 19647 or spellID == 20433 then -- warlock's pet silence
 			local silencePet = TrackSpells[24259]
@@ -742,6 +773,7 @@ function NugRunning.DeactivateTimersOnDeath(self,dstGUID)
         end
     end
 end
+
 
 
 
