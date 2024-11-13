@@ -356,7 +356,6 @@ AddSpell({ 703,8631,8632,8633,11289,11290,26839,26884,48675,48676,42964 },{ name
 AddSpell({ 1330, 26884 },{ name = "Silence", color = colors.PINK, duration = 3 })
 AddSpell({ 18425 },{ name = "Silenced", color = colors.PINK, duration = 3 })
 AddSpell({ 16511, 17347, 17348, 26864 },{ name = "Hemorrhage", color = colors.RED, duration = 15 })
-AddSpell({ 14278 },{ name = "Ghostly Strike", color = colors.PURPLE, duration = 7 })
 AddSpell({ 32748 },{ name = "Deadly Throw Interrupt", color = colors.PINK, duration = 3 })
 
 AddSpell({ 2818,2819,11353,11354,25349,26968,27187,57969,57970}, { name = "Deadly Poison", color = { 0.1, 0.75, 0.1}, duration = 12, short = "Deadly"})
@@ -396,11 +395,11 @@ AddSpell({ 20253, 20614, 20615, 25273, 25274 },{ name = "Intercept", color = col
 AddSpell({ 3411 },{ name = "Intervene", color = colors.YELLOW, duration = 10 })
 AddSpell({ 1715, 7372, 7373, 25212 },{ name = "Hamstring", color = { 192/255, 77/255, 48/255}, duration = 15, pvpduration = 10 })
 AddSpell({ 12323 },{ name = "Piercing Howl", color = { 192/255, 77/255, 48/255}, duration = 6, })
-AddSpell({ 772 },{ name = "Rend", color = colors.RED, duration = 9})
-AddSpell({ 6546 },{ name = "Rend", color = colors.RED, duration = 12})
-AddSpell({ 6547 },{ name = "Rend", color = colors.RED, duration = 15})
-AddSpell({ 6548 },{ name = "Rend", color = colors.RED, duration = 18})
-AddSpell({ 11572,11573,11574,25208 },{ name = "Rend", color = colors.RED, duration = 21})
+AddSpell({ 772 },{ name = "Rend", color = colors.RED, duration = 9)
+AddSpell({ 6546 },{ name = "Rend", color = colors.RED, duration = 12)
+AddSpell({ 6547 },{ name = "Rend", color = colors.RED, duration = 15)
+AddSpell({ 6548 },{ name = "Rend", color = colors.RED, duration = 18)
+AddSpell({ 11572,11573,11574,25208 },{ name = "Rend", color = colors.RED, duration = 21)
 AddSpell({ 46968 },{ name = "Shockwave", color = { 0.6, 0, 1 }, duration = 4, multiTarget = true })
 AddSpell({ 12809 },{ name = "Concussion Blow", color = { 1, 0.3, 0.6 }, duration = 5 })
 AddSpell({ 23694 },{ name = "Immobilized", color = { 1, 0.3, 0.6 }, duration = 5 }) -- Improved Hamstring
@@ -432,7 +431,7 @@ AddSpell({ 6572, 6574, 7379, 11600, 11601, 25288, 25269, 30357 },{ name = "Reven
 AddSpell({ 34428 },{ name = "Victory Rush", duration = 20 }) 
 AddSpell({ 12294, 21551, 21552, 21553, 25248, 30330 },{ name = "Mortal Strike", duration = 10 }) 
 
-AddCooldown( 12294, 21551, 21552, 21553, 25248, 30330, { name = "Mortal Strike",  color = colors.LBLUE })
+AddCooldown( 12294, 21551, 21552, 21553, 25248, 30330 { name = "Mortal Strike",  color = colors.LBLUE })
 AddCooldown( 23881, { name = "Bloodthirst",  color = colors.LBLUE })
 AddCooldown( 23922, { name = "Shield Slam",  color = colors.LBLUE, resetable = true })
 AddCooldown( 1680, { name = "Whirlwind" })
