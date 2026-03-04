@@ -1,7 +1,7 @@
 # NugRunning
 Tracks your own DoTs, CC and CD
 
-this version is a 3.3.5 version with tbc spells added
+this version is a 3.3.5 
 
 TBC 2.4.3 version is here : https://github.com/Macumbafeh/NugRunning/tree/tbc
 
